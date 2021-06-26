@@ -24,10 +24,34 @@ const ArtPieceDetails = () => {
     <main className="art-details-main">
       {artDetails.length > 0 ? (
         artDetails.map((data, index) => {
-          const { GalleryNumber, artistDisplayBio, primaryImage } = data;
+          const {
+            objectName,
+            culture,
+            artistDisplayBio,
+            artistDisplayName,
+            primaryImage,
+            objectDate,
+            department,
+            medium,
+            title,
+          } = data;
           return (
             <article key={index} className="art-details-main__article">
               <img src={primaryImage} alt="" />
+              <div className="art-details-main__article--information">
+                <h3>
+                  {title} - {objectName}
+                </h3>
+                <p>Artist : {artistDisplayName}</p>
+                <p>Bio: {artistDisplayBio}</p>
+                <p>Culture: {culture}</p>
+              </div>
+
+              <div className="art-details-main__article--additional">
+                <h3>Department: {department}</h3>
+                <p>Medium: {medium}</p>
+                <p>Date: {objectDate}</p>
+              </div>
             </article>
           );
         })

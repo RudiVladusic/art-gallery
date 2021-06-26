@@ -7,10 +7,8 @@ const GalleryContainer = ({ initialData }) => {
       {initialData.map((data) => {
         const {
           accessionYear,
-          classification,
           title,
           creditLine,
-          artistAlphaSort,
           objectID,
           artistDisplayName,
           primaryImageSmall,

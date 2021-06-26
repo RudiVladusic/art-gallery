@@ -6,6 +6,14 @@ const Footer = () => {
       <header>
         <h2>Rudi Vladušić</h2>
       </header>
+      <div className="attribution">
+        <h4>
+          All images and information is fetch with the help of:{" "}
+          <a href="https://metmuseum.github.io/">
+            Metropolian museum of Art API
+          </a>
+        </h4>
+      </div>
     </footer>
   );
 };

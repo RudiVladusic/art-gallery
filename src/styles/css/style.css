@@ -53,6 +53,24 @@ img {
   }
 }
 
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -107,6 +125,8 @@ a {
           justify-content: space-between;
   -webkit-box-shadow: 0.15em 0.15em 1em #000;
           box-shadow: 0.15em 0.15em 1em #000;
+  -webkit-animation: fade-in 0.5s ease-in-out;
+          animation: fade-in 0.5s ease-in-out;
 }
 
 .gallery-main__container .gallery-main__article header h2 {

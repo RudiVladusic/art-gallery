@@ -9,7 +9,7 @@ export const getAllArt = async () => {
     throw new Error(message);
   }
   const ids = result.objectIDs
-    .slice(0, 40)
+    .slice(0, 50)
     .map(
       async (id) =>
         await (
