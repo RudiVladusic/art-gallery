@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { getAllArt } from "../APIcalls/InitialDataCall";
 import Loading from "./Loading";
 import GalleryContainer from "./GalleryContainer";
+import Form from "./Form";
+import Error from "./Error";
 const Main = () => {
   const [initialData, setInitialData] = useState(Array);
   const [isLoading, setIsLoading] = useState(Boolean);
-  const [isError, setIsError] = useState(Boolean);
+  const [isError, setIsError] = useState(false);
   const [selectValue, setSelectValue] = useState(String);
+  const [searchTerm, setSearchTerm] = useState(String);
   useEffect(() => {
     setIsLoading(true);
-    getAllArt()
+    let query = "french";
+    getAllArt(query)
       .then((data) => {
         setInitialData(data);
         setIsLoading(false);
@@ -20,23 +24,21 @@ const Main = () => {
       });
   }, []);
 
-  const fetchSelected = async (query) => {
-    const call = await fetch(
-      `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${query}`
-    );
-    const result = await call.json();
-    const ids = result.objectIDs
-      .slice(0, 50)
-      .map(
-        async (id) =>
-          await (
-            await fetch(
-              `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
-              { method: "GET" }
-            )
-          ).json()
-      );
-    return Promise.all(ids);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    getAllArt(searchTerm)
+      .then((data) => {
+        console.log(data, searchTerm);
+        setInitialData(data);
+        setIsLoading(false);
+        setIsError(false);
+      })
+      .catch((error) => {
+        setIsError(true);
+        setIsLoading(false);
+        console.log(error);
+      });
   };
 
   return (
@@ -45,7 +47,7 @@ const Main = () => {
         name="department"
         id="department"
         onChange={(e) => {
-          fetchSelected(e.target.value)
+          getAllArt(e.target.value)
             .then(setIsLoading(true))
             .then((data) => {
               setInitialData(data);
@@ -77,7 +79,18 @@ const Main = () => {
         </option>
         <option value="Drawings and Prints">Drawings and Prints</option>
       </select>
-      {isLoading ? <Loading /> : <GalleryContainer initialData={initialData} />}
+      <Form
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSubmit={handleSubmit}
+      />
+      {isLoading ? (
+        <Loading />
+      ) : isError ? (
+        <Error />
+      ) : (
+        <GalleryContainer initialData={initialData} />
+      )}
     </main>
   );
 };

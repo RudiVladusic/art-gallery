@@ -6,7 +6,6 @@ const GalleryContainer = ({ initialData }) => {
       {console.log(initialData)}
       {initialData.map((data) => {
         const {
-          accessionYear,
           title,
           creditLine,
           objectID,
@@ -18,12 +17,11 @@ const GalleryContainer = ({ initialData }) => {
             <Link to={`/art/${objectID}`}>
               <header>
                 <h2>{title}</h2>
-                <h3>Accession year: {accessionYear}</h3>
               </header>
               <img src={`${primaryImageSmall}`} alt="" />
               <div className="artist-info">
                 {artistDisplayName ? (
-                  <p>Artist name: {artistDisplayName}</p>
+                  <p>{artistDisplayName}</p>
                 ) : (
                   <p>Artist not listed</p>
                 )}

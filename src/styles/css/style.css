@@ -76,28 +76,32 @@ a {
   color: inherit;
 }
 
-.hero-header {
+.hero-header h2 {
   text-align: center;
   text-transform: uppercase;
   font-family: "Antic Didone", serif;
   letter-spacing: 0.01em;
-}
-
-.hero-header h2 {
   font-weight: 400;
+  font-size: 4em;
 }
 
 .gallery-main,
 .art-details-main {
   padding: 0.5em;
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 2em;
   place-items: center;
-  -ms-grid-columns: (1fr)[1];
-      grid-template-columns: repeat(1, 1fr);
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 15em);
 }
 
 .gallery-main__container {
@@ -123,8 +127,8 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-shadow: 0.15em 0.15em 1em #000;
-          box-shadow: 0.15em 0.15em 1em #000;
+  -webkit-box-shadow: 0.105em 0.105em 0.5em #000;
+          box-shadow: 0.105em 0.105em 0.5em #000;
   -webkit-animation: fade-in 0.5s ease-in-out;
           animation: fade-in 0.5s ease-in-out;
 }
@@ -136,14 +140,7 @@ a {
   font-size: 2em;
   text-align: center;
   padding: 0.25em;
-  border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
   color: #303030;
-}
-
-.gallery-main__container .gallery-main__article header h3 {
-  padding: 0.25em;
-  font-weight: 400;
-  font-size: 1em;
 }
 
 .gallery-main__container .gallery-main__article .artist-info {
@@ -161,8 +158,17 @@ a {
   gap: 1em;
 }
 
-.gallery-main__container .gallery-main__article .artist-info p {
+.gallery-main__container .gallery-main__article .artist-info :first-child {
+  text-align: right;
+  font-size: 1.5em;
+  font-style: italic;
+  font-family: "Antic Didone", serif;
   border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+}
+
+.gallery-main__container .gallery-main__article .artist-info p {
+  padding: 0.25em;
+  text-align: center;
 }
 
 .art-details-main__article {
@@ -178,7 +184,29 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-shadow: 0.15em 0.15em 1em #000;
-          box-shadow: 0.15em 0.15em 1em #000;
-  max-width: 50%;
+  max-width: 95vw;
+}
+
+footer {
+  padding: 0.5em;
+}
+
+footer header h2 {
+  padding: 0.25em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+footer .attribution h4 {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  padding: 0.25em;
+  text-align: center;
+}
+
+footer .attribution h4 a {
+  -webkit-text-decoration: underline dotted rgba(0, 0, 0, 0.65);
+          text-decoration: underline dotted rgba(0, 0, 0, 0.65);
+  text-underline-offset: 0.25em;
 }

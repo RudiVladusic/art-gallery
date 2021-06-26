@@ -1,6 +1,6 @@
-export const getAllArt = async () => {
+export const getAllArt = async (query) => {
   const call = await fetch(
-    `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=french`,
+    `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${query}`,
     { method: "GET" }
   );
   const result = await call.json();
