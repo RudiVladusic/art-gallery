@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Antic+Didone&family=Open+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  background: #f0f5f9;
+  font-family: "Open Sans", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+}
+
+.loading {
+  width: 10em;
+  height: 10em;
+  border: 0.25em solid rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+  border-right: 0.25em solid rgba(225, 225, 0, 0.5);
+  -webkit-animation: loading-animation 1.5s linear infinite;
+          animation: loading-animation 1.5s linear infinite;
+}
+
+@-webkit-keyframes loading-animation {
+  0% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+@keyframes loading-animation {
+  0% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hero-header {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Antic Didone", serif;
+  letter-spacing: 0.01em;
+}
+
+.hero-header h2 {
+  font-weight: 400;
+}
+
+.gallery-main,
+.art-details-main {
+  padding: 0.5em;
+  display: -ms-grid;
+  display: grid;
+  gap: 2em;
+  place-items: center;
+  -ms-grid-columns: (1fr)[1];
+      grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  min-height: 100vh;
+}
+
+.gallery-main__container {
+  display: -ms-grid;
+  display: grid;
+  gap: 2em;
+  place-items: start;
+  padding: 0.5em;
+  -ms-grid-columns: (minmax(20em, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+}
+
+.gallery-main__container .gallery-main__article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5em;
+  place-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 0.15em 0.15em 1em #000;
+          box-shadow: 0.15em 0.15em 1em #000;
+}
+
+.gallery-main__container .gallery-main__article header h2 {
+  font-family: "Antic Didone", serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: 2em;
+  text-align: center;
+  padding: 0.25em;
+  border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+  color: #303030;
+}
+
+.gallery-main__container .gallery-main__article header h3 {
+  padding: 0.25em;
+  font-weight: 400;
+  font-size: 1em;
+}
+
+.gallery-main__container .gallery-main__article .artist-info {
+  padding: 0.25em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1em;
+}
+
+.gallery-main__container .gallery-main__article .artist-info p {
+  border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+}
+
+.art-details-main__article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5em;
+  place-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 0.15em 0.15em 1em #000;
+          box-shadow: 0.15em 0.15em 1em #000;
+  max-width: 50%;
+}
