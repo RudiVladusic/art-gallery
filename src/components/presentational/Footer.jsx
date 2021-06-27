@@ -15,7 +15,7 @@ const Footer = () => {
         <h4>
           All images and information is fetched with{" "}
           <a href="https://metmuseum.github.io/">
-            Metropolian museum of Art API
+            Metropolian Museum of Art API
           </a>
         </h4>
       </div>
