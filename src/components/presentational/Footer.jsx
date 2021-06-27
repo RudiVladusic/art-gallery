@@ -1,10 +1,15 @@
-import React from "react";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
     <footer>
       <header>
-        <h2>Rudi Vladušić</h2>
+        <h2>
+          <a href="https://github.com/RudiVladusic">
+            <FontAwesomeIcon icon={faGithub} /> Rudi Vladušić
+          </a>
+        </h2>
       </header>
       <div className="attribution">
         <h4>

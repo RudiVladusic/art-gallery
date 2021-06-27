@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
+import Loading from "./presentational/Loading";
 const ArtPieceDetails = () => {
   const { id } = useParams();
   const [artDetails, setArtDetails] = useState(Array);
@@ -19,6 +19,10 @@ const ArtPieceDetails = () => {
     };
     getArtDetails();
   }, [id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main className="art-details-main">

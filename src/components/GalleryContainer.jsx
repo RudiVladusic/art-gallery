@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const GalleryContainer = ({ initialData }) => {
   return (
     <section className="gallery-main__container">
-      {console.log(initialData)}
       {initialData.map((data) => {
         const {
           title,
