@@ -15,7 +15,6 @@ const ArtPieceDetails = () => {
         console.log("no god, no god please no, no, no, NOOOOO");
       }
       setArtDetails([result]);
-      console.log(result);
     };
     getArtDetails();
   }, [id]);
@@ -38,24 +37,33 @@ const ArtPieceDetails = () => {
             department,
             medium,
             title,
+            accesionYear,
+            classification,
+            country,
+            tags,
           } = data;
           return (
             <article key={index} className="art-details-main__article">
-              <img src={primaryImage} alt="" />
-              <div className="art-details-main__article--information">
-                <h3>
-                  {title} - {objectName}
-                </h3>
-                <p>Artist : {artistDisplayName}</p>
-                <p>Bio: {artistDisplayBio}</p>
-                <p>Culture: {culture}</p>
-              </div>
-
-              <div className="art-details-main__article--additional">
-                <h3>Department: {department}</h3>
-                <p>Medium: {medium}</p>
-                <p>Date: {objectDate}</p>
-              </div>
+              <img src={primaryImage} alt="" width="800" height="450" />
+              <aside className="art-details-main__article-aside">
+                <h3>{title}</h3>
+                <h4>Object name: {objectName}</h4>
+                <p>Artist : {artistDisplayName || "Not listed"}</p>
+                <p>Bio: {artistDisplayBio || "Not listed"}</p>
+                <p>Culture: {culture || "Not listed"}</p>
+                <p>Accesion Year: {accesionYear || "Not listed"}</p>
+                <p>Country: {country || "Not listed"}</p>
+                <p>Classification: {classification || "Not listed"}</p>
+                <div className="art-details-main__article-aside--department">
+                  <h3>Department: {department || "Not listed"}</h3>
+                  <p>Medium: {medium || "Not listed"}</p>
+                  <p>Date: {objectDate || "Not listed"}</p>
+                  {tags &&
+                    tags.map((hashtag) => {
+                      return <p>#{hashtag.term}</p>;
+                    })}
+                </div>
+              </aside>
             </article>
           );
         })
