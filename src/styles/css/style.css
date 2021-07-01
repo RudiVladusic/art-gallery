@@ -137,7 +137,7 @@ a {
   display: -ms-grid;
   display: grid;
   gap: 2em;
-  place-items: start;
+  place-items: start center;
   padding: 0.5em;
   -ms-grid-columns: (minmax(20em, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
@@ -160,6 +160,14 @@ a {
           box-shadow: 0.105em 0.105em 0.5em #000;
   -webkit-animation: fade-in 0.5s ease-in-out;
           animation: fade-in 0.5s ease-in-out;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.gallery-main__container .gallery-main__article:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .gallery-main__container .gallery-main__article header h2 {
@@ -169,7 +177,7 @@ a {
   font-size: 2em;
   text-align: center;
   padding: 0.25em;
-  color: #303030;
+  color: #141414;
 }
 
 .gallery-main__container .gallery-main__article .artist-info {
@@ -195,6 +203,12 @@ a {
   border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
 }
 
+.gallery-main__container .gallery-main__article .artist-info :last-child {
+  text-align: left;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
 .gallery-main__container .gallery-main__article .artist-info p {
   padding: 0.25em;
   text-align: center;
@@ -202,6 +216,15 @@ a {
 
 .art-details-main {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-items: center flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: calc(100vh - 10em);
+  padding: 0.5em;
 }
 
 .art-details-main__article {
@@ -214,17 +237,13 @@ a {
           flex-flow: row wrap;
   gap: 0.5em;
   place-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  max-width: 95vw;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin: 0 auto;
 }
 
 .art-details-main__article-aside {
-  place-self: flex-start;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,13 +251,40 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  max-width: 60ch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  place-self: flex-start;
+  gap: 2em;
 }
 
-.art-details-main__article-aside .art-details-main__article-aside--department {
-  place-self: end;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  justify-self: flex-end;
+.art-details-main__article-aside h3 {
+  font-size: 1.5em;
+  color: #141414;
+  font-weight: 600;
+  font-family: "Antic Didone", serif;
+}
+
+.art-details-main__article-aside h4 {
+  font-size: 1.25em;
+  font-weight: 400;
+  padding: 0.5em 0;
+}
+
+.art-details-main__article-aside span {
+  color: #30475e;
+}
+
+.art-details-main__article-aside p {
+  border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+}
+
+.art-details-main__article-aside .art-details-main__article-aside--department h3 {
+  font-size: 1.5em;
+  color: #141414;
+  font-weight: 600;
+  font-family: "Antic Didone", serif;
 }
 
 footer {
@@ -254,7 +300,7 @@ footer header h2 {
 
 footer .attribution h4 {
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.65);
+  color: #141414;
   padding: 0.25em;
   text-align: center;
 }

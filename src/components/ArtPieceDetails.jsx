@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import Loading from "./presentational/Loading";
+import key from "weak-key";
 const ArtPieceDetails = () => {
   const { id } = useParams();
   const [artDetails, setArtDetails] = useState(Array);
@@ -12,7 +13,8 @@ const ArtPieceDetails = () => {
       );
       const result = await call.json();
       if (!call.ok) {
-        console.log("no god, no god please no, no, no, NOOOOO");
+        const message = `Something went wrong while fetching`;
+        throw new Error(message);
       }
       setArtDetails([result]);
     };
@@ -26,7 +28,7 @@ const ArtPieceDetails = () => {
   return (
     <main className="art-details-main">
       {artDetails.length > 0 ? (
-        artDetails.map((data, index) => {
+        artDetails.map((data) => {
           const {
             objectName,
             culture,
@@ -41,26 +43,58 @@ const ArtPieceDetails = () => {
             classification,
             country,
             tags,
+            creditLine,
           } = data;
           return (
-            <article key={index} className="art-details-main__article">
-              <img src={primaryImage} alt="" width="800" height="450" />
+            <article
+              key={key(ArtPieceDetails)}
+              className="art-details-main__article"
+            >
+              <img src={primaryImage} alt="art" width="800" height="450" />
               <aside className="art-details-main__article-aside">
-                <h3>{title}</h3>
-                <h4>Object name: {objectName}</h4>
-                <p>Artist : {artistDisplayName || "Not listed"}</p>
-                <p>Bio: {artistDisplayBio || "Not listed"}</p>
-                <p>Culture: {culture || "Not listed"}</p>
-                <p>Accesion Year: {accesionYear || "Not listed"}</p>
-                <p>Country: {country || "Not listed"}</p>
-                <p>Classification: {classification || "Not listed"}</p>
+                <div className="art-details-main__article--title">
+                  <h3>{title}</h3>
+                </div>
+                <div className="art-details-main__article-aside--info">
+                  <h4>
+                    <span>Object name:</span> {objectName || "Not listed"}
+                  </h4>
+                  <p>
+                    <span>Artist:</span> {artistDisplayName || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Bio:</span> {artistDisplayBio || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Culture:</span> {culture || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Accesion Year:</span> {accesionYear || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Country:</span> {country || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Classification:</span>{" "}
+                    {classification || "Not listed"}
+                  </p>
+                </div>
                 <div className="art-details-main__article-aside--department">
-                  <h3>Department: {department || "Not listed"}</h3>
-                  <p>Medium: {medium || "Not listed"}</p>
-                  <p>Date: {objectDate || "Not listed"}</p>
+                  <h4>
+                    <span>Department:</span> {department || "Not listed"}
+                  </h4>
+                  <p>
+                    <span>Medium:</span> {medium || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Date:</span> {objectDate || "Not listed"}
+                  </p>
+                  <p>
+                    <span>Credit line:</span> {creditLine || "Not listed"}
+                  </p>
                   {tags &&
-                    tags.map((hashtag) => {
-                      return <p>#{hashtag.term}</p>;
+                    tags.map((hashtag, index) => {
+                      return <p key={index}>#{hashtag.term}</p>;
                     })}
                 </div>
               </aside>

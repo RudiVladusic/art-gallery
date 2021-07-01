@@ -99,7 +99,7 @@ a {
 .gallery-main__container {
   display: grid;
   gap: 2em;
-  place-items: start;
+  place-items: start center;
   padding: 0.5em;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
 
@@ -111,6 +111,13 @@ a {
     justify-content: space-between;
     box-shadow: 0.105em 0.105em 0.5em #000;
     animation: fade-in 0.5s ease-in-out;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
     header {
       h2 {
         font-family: "Antic Didone", serif;
@@ -119,7 +126,7 @@ a {
         font-size: 2em;
         text-align: center;
         padding: 0.25em;
-        color: #303030;
+        color: #141414;
       }
     }
 
@@ -137,6 +144,13 @@ a {
         font-family: "Antic Didone", serif;
         border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
       }
+
+      :last-child {
+        text-align: left;
+        font-size: 1.25em;
+        font-weight: 400;
+      }
+
       p {
         padding: 0.25em;
         text-align: center;
@@ -147,6 +161,11 @@ a {
 
 .art-details-main {
   width: 100%;
+  display: flex;
+  place-items: center flex-start;
+  justify-content: center;
+  min-height: calc(100vh - 10em);
+  padding: 0.5em;
 }
 
 .art-details-main__article {
@@ -154,21 +173,45 @@ a {
   flex-flow: row wrap;
   gap: 0.5em;
   place-items: center;
-  justify-content: space-evenly;
-  max-width: 95vw;
+  justify-content: center;
   margin: 0 auto;
 }
 
 .art-details-main__article-aside {
-  place-self: flex-start;
-  align-self: stretch;
   display: flex;
   flex-direction: column;
+  max-width: 60ch;
+  justify-content: space-between;
+  place-self: flex-start;
+  gap: 2em;
+  h3 {
+    font-size: 1.5em;
+    color: #141414;
+    font-weight: 600;
+    font-family: "Antic Didone", serif;
+  }
+
+  h4 {
+    font-size: 1.25em;
+    font-weight: 400;
+    padding: 0.5em 0;
+  }
+
+  span {
+    color: #30475e;
+  }
+
+  p {
+    border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+  }
 
   .art-details-main__article-aside--department {
-    place-self: end;
-    align-self: flex-end;
-    justify-self: flex-end;
+    h3 {
+      font-size: 1.5em;
+      color: #141414;
+      font-weight: 600;
+      font-family: "Antic Didone", serif;
+    }
   }
 }
 
@@ -185,7 +228,7 @@ footer {
   .attribution {
     h4 {
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.65);
+      color: #141414;
       padding: 0.25em;
       text-align: center;
 
@@ -199,7 +242,6 @@ footer {
 
 form {
   max-width: 25em;
-
   display: flex;
   place-items: center;
   justify-content: space-between;

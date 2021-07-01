@@ -1,7 +1,7 @@
 const Error = () => {
   return (
     <div>
-      <h2>Error...</h2>
+      <h2>No results, try another query!</h2>
     </div>
   );
 };

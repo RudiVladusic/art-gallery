@@ -5,6 +5,7 @@ import GalleryContainer from "./GalleryContainer";
 import Form from "./Form";
 import Error from "./presentational/Error";
 import Select from "./Select";
+import InitialDataContext from "../contexts/InitialDataContext";
 const Main = () => {
   const [initialData, setInitialData] = useState(Array);
   const [isLoading, setIsLoading] = useState(Boolean);
@@ -61,7 +62,9 @@ const Main = () => {
       ) : isError ? (
         <Error />
       ) : (
-        <GalleryContainer initialData={initialData} />
+        <InitialDataContext.Provider value={{ initialData }}>
+          <GalleryContainer />
+        </InitialDataContext.Provider>
       )}
     </main>
   );

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-
-const GalleryContainer = ({ initialData }) => {
+import { useContext } from "react";
+import InitialDataContext from "../contexts/InitialDataContext";
+const GalleryContainer = () => {
+  const { initialData } = useContext(InitialDataContext);
   return (
     <section className="gallery-main__container">
       {console.log(initialData)}
@@ -8,7 +10,7 @@ const GalleryContainer = ({ initialData }) => {
         ? initialData.map((data) => {
             const {
               title,
-              creditLine,
+              objectDate,
               objectID,
               artistDisplayName,
               primaryImageSmall,
@@ -26,10 +28,11 @@ const GalleryContainer = ({ initialData }) => {
                     ) : (
                       <p>Artist not listed</p>
                     )}
-                    {creditLine ? (
-                      <p>Credited: {creditLine}</p>
+
+                    {objectDate ? (
+                      <p>Date: {objectDate}</p>
                     ) : (
-                      <p>Credits not listed</p>
+                      <p>Date not listed</p>
                     )}
                   </div>
                 </Link>
