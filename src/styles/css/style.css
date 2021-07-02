@@ -1,34 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Antic+Didone&family=Open+Sans&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+@-webkit-keyframes modal {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
-
-html {
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  background: #f0f5f9;
-  font-family: "Open Sans", sans-serif;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
-  display: block;
-}
-
-.loading {
-  width: 10em;
-  height: 10em;
-  border: 0.25em solid rgba(0, 0, 0, 0.25);
-  border-radius: 100%;
-  border-right: 0.25em solid rgba(225, 225, 0, 0.5);
-  -webkit-animation: loading-animation 1.5s linear infinite;
-          animation: loading-animation 1.5s linear infinite;
+@keyframes modal {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 @-webkit-keyframes loading-animation {
@@ -71,6 +52,52 @@ img {
   }
 }
 
+@-webkit-keyframes text-reveal {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+@keyframes text-reveal {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  background: #f0f5f9;
+  font-family: "Open Sans", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+}
+
+.loading {
+  width: 10em;
+  height: 10em;
+  border: 0.25em solid rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+  border-right: 0.25em solid rgba(225, 225, 0, 0.5);
+  -webkit-animation: loading-animation 1.5s linear infinite;
+          animation: loading-animation 1.5s linear infinite;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -83,8 +110,15 @@ a {
   letter-spacing: 0.01em;
   font-weight: 400;
   font-size: 4em;
+  padding: 0.25em;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero-header h2 {
+    font-size: 2em;
+  }
 }
 
 .hero-header h2 ::before {
@@ -99,20 +133,6 @@ a {
           transform: translateX(0);
   -webkit-animation: text-reveal 5s ease 1s forwards;
           animation: text-reveal 5s ease 1s forwards;
-}
-
-@-webkit-keyframes text-reveal {
-  to {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-  }
-}
-
-@keyframes text-reveal {
-  to {
-    -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-  }
 }
 
 .gallery-main {
@@ -131,6 +151,28 @@ a {
           justify-content: flex-start;
   width: 100%;
   min-height: calc(100vh - 15em);
+}
+
+.about-main {
+  min-height: calc(100vh - 15em);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[1];
+      grid-template-columns: repeat(1, 1fr);
+  place-items: center;
+}
+
+.about-main header {
+  padding: 2em 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: "Antic Didone", serif;
+  font-size: 1.5em;
+}
+
+.about-main p {
+  max-width: 60ch;
 }
 
 .gallery-main__container,
@@ -187,10 +229,17 @@ a {
   font-family: "Antic Didone", serif;
   font-weight: 400;
   letter-spacing: 0.01em;
-  font-size: 2em;
+  font-size: 2.5em;
   text-align: center;
   padding: 0.25em;
   color: #141414;
+}
+
+@media (max-width: 768px) {
+  .gallery-main__container .gallery-main__article header h2,
+  .my-favorites-main .gallery-main__article header h2 {
+    font-size: 1.5em;
+  }
 }
 
 .gallery-main__container .gallery-main__article .artist-info,
@@ -221,7 +270,7 @@ a {
 .gallery-main__container .gallery-main__article .artist-info :last-child,
 .my-favorites-main .gallery-main__article .artist-info :last-child {
   text-align: left;
-  font-size: 1.25em;
+  font-size: 1.2em;
   font-weight: 400;
 }
 
@@ -259,11 +308,6 @@ a {
           justify-content: center;
   margin: 0 auto;
   padding: 0.5em;
-}
-
-.display {
-  width: 300px;
-  height: 300px;
 }
 
 .add-to-favorites {
@@ -308,20 +352,6 @@ nav a {
   border-bottom: none;
 }
 
-@-webkit-keyframes modal {
-  to {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-
-@keyframes modal {
-  to {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-
 .art-details-main__article-aside {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -358,6 +388,24 @@ nav a {
 
 .art-details-main__article-aside p {
   border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+}
+
+.art-details-main__article-aside .hashtag-cont {
+  border-bottom: none;
+  padding: 1em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-items: flex-start;
+  gap: 2em;
+}
+
+.art-details-main__article-aside .hashtags {
+  background: #fff;
+  padding: 0.25em 0.5em;
+  border-radius: 9999px;
+  color: #ddd;
+  background: #303030;
 }
 
 .art-details-main__article-aside .art-details-main__article-aside--department h3 {

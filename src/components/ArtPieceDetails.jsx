@@ -121,7 +121,15 @@ const ArtPieceDetails = () => {
                   <p>
                     <span>Credit line:</span> {creditLine || "Not listed"}
                   </p>
-                  <p>{tags && tags.map((hashtag) => "#" + hashtag.term)}</p>
+                  <p className="hashtag-cont">
+                    {tags &&
+                      tags.map((hashtag, index) => (
+                        <span
+                          className="hashtags"
+                          key={index}
+                        >{`#${hashtag.term}`}</span>
+                      ))}
+                  </p>
                 </div>
                 {state.isModalOpen && (
                   <Modal

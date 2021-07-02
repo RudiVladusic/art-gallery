@@ -1,0 +1,30 @@
+@keyframes modal {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes loading-animation {
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes text-reveal {
+  to {
+    transform: translateX(100%);
+  }
+}
