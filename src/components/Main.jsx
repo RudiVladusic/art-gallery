@@ -14,17 +14,23 @@ const Main = () => {
   const [searchTerm, setSearchTerm] = useState(String);
 
   useEffect(() => {
-    setIsLoading(true);
-    let query = "french";
-    getAllArt(query)
-      .then((data) => {
-        setInitialData(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsError(true);
-        console.log(error);
-      });
+    const initialValues = localStorage.getItem("initialData");
+    if (initialValues) {
+      setInitialData(JSON.parse(initialValues));
+    } else {
+      setIsLoading(true);
+      let query = "french";
+      getAllArt(query)
+        .then((data) => {
+          setInitialData(data);
+          setIsLoading(false);
+          localStorage.setItem("initialData", JSON.stringify(data));
+        })
+        .catch((error) => {
+          setIsError(true);
+          console.log(error);
+        });
+    }
   }, []);
 
   const handleSubmit = (e) => {
@@ -35,6 +41,7 @@ const Main = () => {
         setInitialData(data);
         setIsLoading(false);
         setIsError(false);
+        localStorage.setItem("initialData", JSON.stringify(data));
       })
       .catch((error) => {
         setIsError(true);

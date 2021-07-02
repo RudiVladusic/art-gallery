@@ -3,7 +3,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Form = ({ handleSubmit, searchTerm, setSearchTerm }) => {
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="search term"></label>
       <input
         type="text"

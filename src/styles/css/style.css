@@ -133,17 +133,28 @@ a {
   min-height: calc(100vh - 15em);
 }
 
-.gallery-main__container {
+.gallery-main__container,
+.my-favorites-main {
   display: -ms-grid;
   display: grid;
   gap: 2em;
   place-items: start center;
   padding: 0.5em;
-  -ms-grid-columns: (minmax(20em, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  -ms-grid-columns: (minmax(18em, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  min-height: calc(100vh - 10em);
 }
 
-.gallery-main__container .gallery-main__article {
+@media (max-width: 768px) {
+  .gallery-main__container,
+  .my-favorites-main {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.gallery-main__container .gallery-main__article,
+.my-favorites-main .gallery-main__article {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -165,12 +176,14 @@ a {
   transition: all 0.5s ease-in-out;
 }
 
-.gallery-main__container .gallery-main__article:hover {
+.gallery-main__container .gallery-main__article:hover,
+.my-favorites-main .gallery-main__article:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
 }
 
-.gallery-main__container .gallery-main__article header h2 {
+.gallery-main__container .gallery-main__article header h2,
+.my-favorites-main .gallery-main__article header h2 {
   font-family: "Antic Didone", serif;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -180,7 +193,8 @@ a {
   color: #141414;
 }
 
-.gallery-main__container .gallery-main__article .artist-info {
+.gallery-main__container .gallery-main__article .artist-info,
+.my-favorites-main .gallery-main__article .artist-info {
   padding: 0.25em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -195,7 +209,8 @@ a {
   gap: 1em;
 }
 
-.gallery-main__container .gallery-main__article .artist-info :first-child {
+.gallery-main__container .gallery-main__article .artist-info :first-child,
+.my-favorites-main .gallery-main__article .artist-info :first-child {
   text-align: right;
   font-size: 1.5em;
   font-style: italic;
@@ -203,13 +218,15 @@ a {
   border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
 }
 
-.gallery-main__container .gallery-main__article .artist-info :last-child {
+.gallery-main__container .gallery-main__article .artist-info :last-child,
+.my-favorites-main .gallery-main__article .artist-info :last-child {
   text-align: left;
   font-size: 1.25em;
   font-weight: 400;
 }
 
-.gallery-main__container .gallery-main__article .artist-info p {
+.gallery-main__container .gallery-main__article .artist-info p,
+.my-favorites-main .gallery-main__article .artist-info p {
   padding: 0.25em;
   text-align: center;
 }
@@ -241,6 +258,68 @@ a {
       -ms-flex-pack: center;
           justify-content: center;
   margin: 0 auto;
+  padding: 0.5em;
+}
+
+.display {
+  width: 300px;
+  height: 300px;
+}
+
+.add-to-favorites {
+  place-self: start;
+  padding: 0.5em;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 9999px;
+}
+
+nav {
+  background: #fff;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  place-items: flex-end;
+  gap: 1em;
+}
+
+nav a {
+  padding: 0.5em;
+}
+
+.modal {
+  text-align: left;
+  text-transform: uppercase;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-animation: modal 0.25s ease forwards;
+          animation: modal 0.25s ease forwards;
+  text-decoration: none;
+}
+
+.modal p {
+  border-bottom: none;
+}
+
+@-webkit-keyframes modal {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes modal {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 .art-details-main__article-aside {
@@ -257,6 +336,7 @@ a {
           justify-content: space-between;
   place-self: flex-start;
   gap: 2em;
+  padding: 0.5em;
 }
 
 .art-details-main__article-aside h3 {
@@ -339,12 +419,4 @@ input {
 input:focus {
   -webkit-box-shadow: 0.18em 0.18em 0.18em -0.06em #000, -0.12em -0.12em 0.18em -0.06em #000;
           box-shadow: 0.18em 0.18em 0.18em -0.06em #000, -0.12em -0.12em 0.18em -0.06em #000;
-}
-
-button {
-  padding: 0.5em;
-  border: none;
-  background: transparent;
-  font-size: inherit;
-  cursor: pointer;
 }

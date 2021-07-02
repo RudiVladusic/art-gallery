@@ -1,12 +1,21 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Loading from "./presentational/Loading";
 import key from "weak-key";
+import { artDetailReducer } from "../reducers/artDetailReducer";
+import Modal from "./Modal";
+const defaultModalState = {
+  isModalOpen: false,
+  modalContent: "",
+};
 const ArtPieceDetails = () => {
   const { id } = useParams();
   const [artDetails, setArtDetails] = useState(Array);
-
+  const [userFavs, setUserFavs] = useState(Array);
+  const [state, dispatch] = useReducer(artDetailReducer, defaultModalState);
+  // console.log(state);
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getArtDetails = async () => {
       const call = await fetch(
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
@@ -22,8 +31,27 @@ const ArtPieceDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const itemInStorage = JSON.parse(localStorage.getItem("favs"));
+    if (itemInStorage) {
+      setUserFavs(itemInStorage);
+    }
   }, []);
+
+  const handleAddToFav = (objectID) => {
+    const check = userFavs.some((id) => id === String(objectID));
+    if (!check) {
+      dispatch({ type: "ITEM_ADDED" });
+      const toSave = [...userFavs, JSON.stringify(objectID)];
+      setUserFavs(toSave);
+      localStorage.setItem("favs", JSON.stringify(toSave));
+    } else {
+      dispatch({ type: "ITEM_EXISTS" });
+    }
+  };
+
+  const closeModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
 
   return (
     <main className="art-details-main">
@@ -44,6 +72,7 @@ const ArtPieceDetails = () => {
             country,
             tags,
             creditLine,
+            objectID,
           } = data;
           return (
             <article
@@ -92,11 +121,23 @@ const ArtPieceDetails = () => {
                   <p>
                     <span>Credit line:</span> {creditLine || "Not listed"}
                   </p>
-                  {tags &&
-                    tags.map((hashtag, index) => {
-                      return <p key={index}>#{hashtag.term}</p>;
-                    })}
+                  <p>{tags && tags.map((hashtag) => "#" + hashtag.term)}</p>
                 </div>
+                {state.isModalOpen && (
+                  <Modal
+                    modalContent={state.modalContent}
+                    closeModal={closeModal}
+                  />
+                )}
+                <button
+                  className="add-to-favorites"
+                  onClick={() => {
+                    handleAddToFav(objectID);
+                    // dispatch({ type: "ITEM_ADDED" });
+                  }}
+                >
+                  Add to favorites
+                </button>
               </aside>
             </article>
           );

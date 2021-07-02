@@ -5,7 +5,6 @@ const GalleryContainer = () => {
   const { initialData } = useContext(InitialDataContext);
   return (
     <section className="gallery-main__container">
-      {console.log(initialData)}
       {initialData
         ? initialData.map((data) => {
             const {

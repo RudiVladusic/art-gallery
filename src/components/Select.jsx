@@ -17,6 +17,7 @@ const Select = ({
           .then((data) => {
             setInitialData(data);
             setIsLoading(false);
+            localStorage.setItem("initialData", JSON.stringify(data));
           });
       }}
       defaultValue={selectValue}

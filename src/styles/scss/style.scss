@@ -96,13 +96,18 @@ a {
   min-height: calc(100vh - 15em);
 }
 
-.gallery-main__container {
+.gallery-main__container,
+.my-favorites-main {
   display: grid;
   gap: 2em;
   place-items: start center;
   padding: 0.5em;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  min-height: calc(100vh - 10em);
 
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .gallery-main__article {
     display: flex;
     flex-direction: column;
@@ -175,6 +180,54 @@ a {
   place-items: center;
   justify-content: center;
   margin: 0 auto;
+  padding: 0.5em;
+}
+
+.display {
+  width: 300px;
+  height: 300px;
+}
+
+.add-to-favorites {
+  place-self: start;
+  padding: 0.5em;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 9999px;
+}
+
+nav {
+  background: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  place-items: flex-end;
+  gap: 1em;
+
+  a {
+    padding: 0.5em;
+  }
+}
+
+.modal {
+  text-align: left;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  animation: modal 0.25s ease forwards;
+  text-decoration: none;
+
+  p {
+    border-bottom: none;
+  }
+}
+
+@keyframes modal {
+  to {
+    transform: translateY(0);
+  }
 }
 
 .art-details-main__article-aside {
@@ -184,6 +237,7 @@ a {
   justify-content: space-between;
   place-self: flex-start;
   gap: 2em;
+  padding: 0.5em;
   h3 {
     font-size: 1.5em;
     color: #141414;
@@ -259,12 +313,4 @@ input {
     box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
       -0.12em -0.12em 0.18em -0.06em #000;
   }
-}
-
-button {
-  padding: 0.5em;
-  border: none;
-  background: transparent;
-  font-size: inherit;
-  cursor: pointer;
 }

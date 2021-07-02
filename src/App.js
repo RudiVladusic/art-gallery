@@ -3,18 +3,28 @@ import Main from "./components/Main";
 import Hero from "./components/presentational/Hero";
 import Footer from "./components/presentational/Footer";
 import ArtPieceDetails from "./components/ArtPieceDetails";
+import Nav from "./components/presentational/Nav";
 import "./styles/css/style.css";
+import MyFavorites from "./components/MyFavorites";
+import About from "./components/presentational/About";
 const App = () => {
   return (
     <Router>
       <Switch>
         <>
+          <Nav />
           <Hero />
           <Route exact path="/">
             <Main />
           </Route>
           <Route exact path="/art/:id">
             <ArtPieceDetails />
+          </Route>
+          <Route exact path="/myfavorites">
+            <MyFavorites />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
           <Footer />
         </>
