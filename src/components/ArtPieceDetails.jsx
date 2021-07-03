@@ -141,7 +141,6 @@ const ArtPieceDetails = () => {
                   className="add-to-favorites"
                   onClick={() => {
                     handleAddToFav(objectID);
-                    // dispatch({ type: "ITEM_ADDED" });
                   }}
                 >
                   Add to favorites

@@ -213,18 +213,6 @@ nav {
   }
 }
 
-.modal {
-  text-align: left;
-  text-transform: uppercase;
-  transform: translateY(100%);
-  animation: modal 0.25s ease forwards;
-  text-decoration: none;
-
-  p {
-    border-bottom: none;
-  }
-}
-
 .art-details-main__article-aside {
   display: flex;
   flex-direction: column;
@@ -233,6 +221,7 @@ nav {
   place-self: flex-start;
   gap: 2em;
   padding: 0.5em;
+  position: relative;
   h3 {
     font-size: $desktopFontSize;
     color: #141414;
@@ -280,6 +269,21 @@ nav {
   }
 }
 
+.modal {
+  text-align: left;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  animation: modal 0.25s ease forwards;
+  text-decoration: none;
+  border-bottom: none;
+  position: absolute;
+  bottom: 3.5em;
+
+  p {
+    border-bottom: none;
+  }
+}
+
 footer {
   padding: 0.5em;
   header {
@@ -310,6 +314,15 @@ form {
   display: flex;
   place-items: center;
   justify-content: space-between;
+}
+
+.form-submit {
+  padding: 0.5em;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
 }
 
 input {

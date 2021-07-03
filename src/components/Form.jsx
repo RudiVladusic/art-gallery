@@ -13,7 +13,7 @@ const Form = ({ handleSubmit, searchTerm, setSearchTerm }) => {
         value={searchTerm}
         placeholder="Type here..."
       />
-      <button type="submit">
+      <button type="submit" className="form-submit">
         <FontAwesomeIcon icon={faSearch} />
       </button>
     </form>
