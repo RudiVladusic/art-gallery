@@ -83,14 +83,15 @@ html {
 img {
   max-width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
 }
 
 .loading {
   width: 10em;
   height: 10em;
+  margin: 0 auto;
   border: 0.25em solid rgba(0, 0, 0, 0.25);
   border-radius: 100%;
   border-right: 0.25em solid rgba(225, 225, 0, 0.5);
@@ -175,28 +176,38 @@ a {
   max-width: 60ch;
 }
 
-.gallery-main__container,
-.my-favorites-main {
-  display: -ms-grid;
-  display: grid;
-  gap: 2em;
-  place-items: start center;
-  padding: 0.5em;
-  -ms-grid-columns: (minmax(18em, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-  min-height: calc(100vh - 10em);
+.swiper-container {
+  width: 90vw;
+  height: 100%;
+  padding: 1em;
+}
+
+li {
+  list-style-type: none;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
 }
 
 @media (max-width: 768px) {
-  .gallery-main__container,
-  .my-favorites-main {
-    -ms-grid-columns: (1fr)[1];
-        grid-template-columns: repeat(1, 1fr);
+  li img {
+    height: 20em;
+    margin: 0 auto;
   }
 }
 
-.gallery-main__container .gallery-main__article,
-.my-favorites-main .gallery-main__article {
+.swiper-slide {
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.gallery-main__container {
+  padding: 0.5em;
+  min-height: calc(100vh - 10em);
+}
+
+.gallery-main__article {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -211,21 +222,14 @@ a {
           justify-content: space-between;
   -webkit-box-shadow: 0.105em 0.105em 0.5em #000;
           box-shadow: 0.105em 0.105em 0.5em #000;
-  -webkit-animation: fade-in 0.5s ease-in-out;
-          animation: fade-in 0.5s ease-in-out;
-  overflow: hidden;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
 }
 
-.gallery-main__container .gallery-main__article:hover,
-.my-favorites-main .gallery-main__article:hover {
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+.gallery-main__article:hover {
+  -webkit-transform: scale(1.025);
+          transform: scale(1.025);
 }
 
-.gallery-main__container .gallery-main__article header h2,
-.my-favorites-main .gallery-main__article header h2 {
+.gallery-main__article header h2 {
   font-family: "Antic Didone", serif;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -236,14 +240,12 @@ a {
 }
 
 @media (max-width: 768px) {
-  .gallery-main__container .gallery-main__article header h2,
-  .my-favorites-main .gallery-main__article header h2 {
-    font-size: 1.5em;
+  .gallery-main__article header h2 {
+    font-size: 1em;
   }
 }
 
-.gallery-main__container .gallery-main__article .artist-info,
-.my-favorites-main .gallery-main__article .artist-info {
+.gallery-main__article .artist-info {
   padding: 0.25em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -258,24 +260,28 @@ a {
   gap: 1em;
 }
 
-.gallery-main__container .gallery-main__article .artist-info :first-child,
-.my-favorites-main .gallery-main__article .artist-info :first-child {
+.gallery-main__article .artist-info :first-child {
   text-align: right;
-  font-size: 1.5em;
+  font-size: 2em;
   font-style: italic;
   font-family: "Antic Didone", serif;
   border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
 }
 
-.gallery-main__container .gallery-main__article .artist-info :last-child,
-.my-favorites-main .gallery-main__article .artist-info :last-child {
+@media (max-width: 768px) {
+  .gallery-main__article .artist-info :first-child {
+    font-size: 1.5em;
+  }
+}
+
+.gallery-main__article .artist-info :last-child {
   text-align: left;
   font-size: 1.2em;
   font-weight: 400;
+  font-size: 1em;
 }
 
-.gallery-main__container .gallery-main__article .artist-info p,
-.my-favorites-main .gallery-main__article .artist-info p {
+.gallery-main__article .artist-info p {
   padding: 0.25em;
   text-align: center;
 }
@@ -291,6 +297,19 @@ a {
           justify-content: center;
   min-height: calc(100vh - 10em);
   padding: 0.5em;
+}
+
+.my-favorites-main {
+  min-height: calc(100vh - 10em);
+  padding: 0.5em;
+  width: 100%;
+}
+
+.my-favorites-main header h2 {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 .art-details-main__article {
@@ -384,7 +403,7 @@ nav a {
   display: -ms-flexbox;
   display: flex;
   place-items: flex-start;
-  gap: 2em;
+  gap: 0.5em;
 }
 
 .art-details-main__article-aside .hashtags {
