@@ -107,7 +107,7 @@ a {
 }
 
 .gallery-main {
-  padding: 0.5em;
+  padding: 3.5em 0.5em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,9 +117,9 @@ a {
           flex-direction: column;
   gap: 2em;
   place-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
   min-height: calc(100vh - 15em);
 }
@@ -131,6 +131,7 @@ a {
   -ms-grid-columns: (1fr)[1];
       grid-template-columns: repeat(1, 1fr);
   place-items: center;
+  padding: 3.5em 0.5em;
 }
 
 .about-main header {
@@ -273,6 +274,7 @@ li {
           flex-direction: column;
   place-content: center flex-start;
   min-height: calc(100vh - 15em);
+  padding: 3.5em 0.5em;
 }
 
 .no-favs {
@@ -297,7 +299,7 @@ li {
       -ms-flex-pack: center;
           justify-content: center;
   min-height: calc(100vh - 10em);
-  padding: 0.5em;
+  padding: 3.5em 0.5em;
 }
 
 .my-favorites-main {
@@ -498,6 +500,8 @@ nav .nav-header-center::before {
 .mobile-nav {
   width: 0%;
   height: 100%;
+  -webkit-transform: translateX(-100vw);
+          transform: translateX(-100vw);
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column wrap;
@@ -550,6 +554,8 @@ nav .nav-header-center::before {
   display: -ms-flexbox;
   display: flex;
   width: 50%;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 
 .active :nth-child(1) {

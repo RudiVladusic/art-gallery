@@ -38,12 +38,12 @@ a {
 }
 
 .gallery-main {
-  padding: 0.5em;
+  padding: 3.5em 0.5em;
   display: flex;
   flex-direction: column;
   gap: 2em;
   place-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
   min-height: calc(100vh - 15em);
 }
@@ -53,6 +53,7 @@ a {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   place-items: center;
+  padding: 3.5em 0.5em;
 
   header {
     padding: 2em 0;
@@ -169,6 +170,7 @@ li {
   flex-direction: column;
   place-content: center flex-start;
   min-height: calc(100vh - 15em);
+  padding: 3.5em 0.5em;
 }
 
 .no-favs {
@@ -187,7 +189,7 @@ li {
   place-items: center flex-start;
   justify-content: center;
   min-height: calc(100vh - 10em);
-  padding: 0.5em;
+  padding: 3.5em 0.5em;
 }
 
 .my-favorites-main {
@@ -352,6 +354,7 @@ nav {
 .mobile-nav {
   width: 0%;
   height: 100%;
+  transform: translateX(-100vw);
   flex-flow: column wrap;
   justify-content: space-evenly;
   place-items: center;
@@ -389,7 +392,7 @@ nav {
 .active {
   display: flex;
   width: 50%;
-
+  transform: translateX(0);
   :nth-child(1) {
     opacity: 1;
     transition-delay: 0.15s;
