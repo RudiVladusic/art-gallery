@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Loading from "./presentational/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -8,10 +7,9 @@ SwiperCore.use([Navigation]);
 
 const MyFavorites = () => {
   const [toDisplay, setToDisplay] = useState(Array);
-  const [showLoading, setShowLoading] = useState(Boolean);
   useEffect(() => {
     const check = JSON.parse(localStorage.getItem("favs"));
-    setShowLoading(true);
+
     if (check) {
       const fetchUserFavs = async () => {
         const userFavorites = check.map(
@@ -26,10 +24,7 @@ const MyFavorites = () => {
         return Promise.all(userFavorites);
       };
       fetchUserFavs()
-        .then((data) => {
-          setShowLoading(false);
-          setToDisplay(data);
-        })
+        .then((data) => setToDisplay(data))
         .catch((error) => console.log(error));
     }
   }, []);
@@ -39,51 +34,46 @@ const MyFavorites = () => {
       <header>
         <h2>My Favorites</h2>
       </header>
-      {showLoading && toDisplay.length > 0 ? (
-        <Loading />
-      ) : (
-        toDisplay.length > 0 &&
-        !showLoading && (
-          <Swiper
-            spaceBetween={25}
-            tag="section"
-            wrapperTag="ul"
-            id="main"
-            navigation
-            centeredSlides="true"
-            grabCursor="true"
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
+      {toDisplay.length > 0 ? (
+        <Swiper
+          spaceBetween={25}
+          tag="section"
+          wrapperTag="ul"
+          id="main"
+          navigation
+          centeredSlides="true"
+          grabCursor="true"
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
 
-              768: {
-                slidesPerView: 1,
-              },
+            768: {
+              slidesPerView: 1,
+            },
 
-              820: {
-                slidesPerView: 2,
-              },
+            820: {
+              slidesPerView: 2,
+            },
 
-              1000: {
-                slidesPerView: 3,
-              },
+            1000: {
+              slidesPerView: 3,
+            },
 
-              1200: {
-                slidesPerView: 4,
-              },
-            }}
-          >
-            {toDisplay.map((data) => {
-              return (
-                <SwiperSlide key={data.objectID} tag="li">
-                  <ArtCard data={data} />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        )
-      )}
+            1200: {
+              slidesPerView: 4,
+            },
+          }}
+        >
+          {toDisplay.map((data) => {
+            return (
+              <SwiperSlide key={data.objectID} tag="li">
+                <ArtCard data={data} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      ) : null}
     </main>
   );
 };
