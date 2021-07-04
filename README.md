@@ -1,6 +1,6 @@
 # Art Gallery
 
-Working on through-the-history gallery of arts with the power of [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/).
+Through-the-history gallery of arts powered by [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/).
 
 ## Live
 
@@ -12,11 +12,9 @@ HTML, CSS, ReactJS
 
 ## Libraries used
 
-React router, Font Awesome free SVG icons,
+React router, Font Awesome free SVG icons, React Swiper
 
 ## Todo
 
-- Add feature to bookmark entries
 - Add "related" component
 - Add pagination ?
-- General styling / responsive

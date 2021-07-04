@@ -40,9 +40,6 @@ const GalleryContainer = () => {
             slidesPerView: 4,
           },
         }}
-        onSlideChange={() => {
-          console.log("slide change");
-        }}
       >
         {initialData
           ? initialData.map((data) => {
