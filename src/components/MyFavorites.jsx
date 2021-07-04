@@ -39,49 +39,50 @@ const MyFavorites = () => {
       <header>
         <h2>My Favorites</h2>
       </header>
-      {toDisplay.length === 0 && !showLoading ? (
-        <h2 className="no-favs">You have no favorites yet!</h2>
-      ) : toDisplay.length > 0 && !showLoading ? (
-        <Swiper
-          spaceBetween={25}
-          tag="section"
-          wrapperTag="ul"
-          id="main"
-          navigation
-          centeredSlides="true"
-          grabCursor="true"
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-            },
-
-            768: {
-              slidesPerView: 1,
-            },
-
-            820: {
-              slidesPerView: 2,
-            },
-
-            1000: {
-              slidesPerView: 3,
-            },
-
-            1200: {
-              slidesPerView: 4,
-            },
-          }}
-        >
-          {toDisplay.map((data) => {
-            return (
-              <SwiperSlide key={data.objectID} tag="li">
-                <ArtCard data={data} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      ) : (
+      {showLoading && toDisplay.length > 0 ? (
         <Loading />
+      ) : (
+        toDisplay.length > 0 &&
+        !showLoading && (
+          <Swiper
+            spaceBetween={25}
+            tag="section"
+            wrapperTag="ul"
+            id="main"
+            navigation
+            centeredSlides="true"
+            grabCursor="true"
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+
+              768: {
+                slidesPerView: 1,
+              },
+
+              820: {
+                slidesPerView: 2,
+              },
+
+              1000: {
+                slidesPerView: 3,
+              },
+
+              1200: {
+                slidesPerView: 4,
+              },
+            }}
+          >
+            {toDisplay.map((data) => {
+              return (
+                <SwiperSlide key={data.objectID} tag="li">
+                  <ArtCard data={data} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        )
       )}
     </main>
   );

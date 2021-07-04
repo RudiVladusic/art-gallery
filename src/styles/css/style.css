@@ -277,18 +277,6 @@ li {
   padding: 3.5em 0.5em;
 }
 
-.no-favs {
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.25em;
-}
-
-@media (max-width: 768px) {
-  .no-favs {
-    font-size: 1em;
-  }
-}
-
 .art-details-main {
   width: 100%;
   display: -webkit-box;
