@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./components/Main";
-import Hero from "./components/presentational/Hero";
 import Footer from "./components/presentational/Footer";
 import ArtPieceDetails from "./components/ArtPieceDetails";
 import Nav from "./components/presentational/Nav";
@@ -13,7 +12,7 @@ const App = () => {
       <Switch>
         <>
           <Nav />
-          <Hero />
+
           <Route exact path="/">
             <Main />
           </Route>

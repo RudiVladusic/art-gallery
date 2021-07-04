@@ -1,19 +1,25 @@
 import { useParams } from "react-router";
 import { useState, useEffect, useReducer } from "react";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as Checked } from "@fortawesome/free-regular-svg-icons";
 import Loading from "./presentational/Loading";
 import key from "weak-key";
 import { artDetailReducer } from "../reducers/artDetailReducer";
 import Modal from "./Modal";
-const defaultModalState = {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const defaultState = {
   isModalOpen: false,
   modalContent: "",
+  favs: [],
 };
+
 const ArtPieceDetails = () => {
   const { id } = useParams();
   const [artDetails, setArtDetails] = useState(Array);
-  const [userFavs, setUserFavs] = useState(Array);
-  const [state, dispatch] = useReducer(artDetailReducer, defaultModalState);
-  // console.log(state);
+  const [isBookmark, setIsBookmark] = useState(Boolean);
+  const [state, dispatch] = useReducer(artDetailReducer, defaultState);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const getArtDetails = async () => {
@@ -29,23 +35,30 @@ const ArtPieceDetails = () => {
     };
     getArtDetails();
   }, [id]);
-
+  // eslint-disable-next-line
   useEffect(() => {
     const itemInStorage = JSON.parse(localStorage.getItem("favs"));
     if (itemInStorage) {
-      setUserFavs(itemInStorage);
+      defaultState.favs = itemInStorage;
     }
-  }, []);
+
+    const idx = artDetails.map((id) => id.objectID);
+    const checkItemInFavs = defaultState.favs.some((id) => idx[0] === id);
+
+    if (!checkItemInFavs) {
+      setIsBookmark(false);
+    } else {
+      setIsBookmark(true);
+    }
+  });
 
   const handleAddToFav = (objectID) => {
-    const check = userFavs.some((id) => id === String(objectID));
+    const check = defaultState.favs.some((id) => objectID === id);
+
     if (!check) {
-      dispatch({ type: "ITEM_ADDED" });
-      const toSave = [...userFavs, JSON.stringify(objectID)];
-      setUserFavs(toSave);
-      localStorage.setItem("favs", JSON.stringify(toSave));
+      dispatch({ type: "ITEM_ADDED", payload: objectID });
     } else {
-      dispatch({ type: "ITEM_EXISTS" });
+      dispatch({ type: "ITEM_DELETED", payload: objectID });
     }
   };
 
@@ -83,6 +96,24 @@ const ArtPieceDetails = () => {
               <aside className="art-details-main__article-aside">
                 <div className="art-details-main__article--title">
                   <h3>{title}</h3>
+                  <button
+                    className="add-to-favorites"
+                    onClick={() => {
+                      handleAddToFav(objectID);
+                    }}
+                  >
+                    {isBookmark ? (
+                      <FontAwesomeIcon icon={faBookmark} />
+                    ) : (
+                      <FontAwesomeIcon icon={Checked} />
+                    )}
+                  </button>
+                  {state.isModalOpen && (
+                    <Modal
+                      modalContent={state.modalContent}
+                      closeModal={closeModal}
+                    />
+                  )}
                 </div>
                 <div className="art-details-main__article-aside--info">
                   <h4>
@@ -131,20 +162,6 @@ const ArtPieceDetails = () => {
                       ))}
                   </p>
                 </div>
-                {state.isModalOpen && (
-                  <Modal
-                    modalContent={state.modalContent}
-                    closeModal={closeModal}
-                  />
-                )}
-                <button
-                  className="add-to-favorites"
-                  onClick={() => {
-                    handleAddToFav(objectID);
-                  }}
-                >
-                  Add to favorites
-                </button>
               </aside>
             </article>
           );

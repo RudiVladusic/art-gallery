@@ -1,25 +1,34 @@
 export const artDetailReducer = (state, action) => {
-  if (action.type === "ITEM_ADDED") {
-    return {
-      ...state,
-      isModalOpen: true,
-      modalContent: "Item added!",
-    };
-  }
-  if (action.type === "ITEM_EXISTS") {
-    return {
-      ...state,
-      isModalOpen: true,
-      modalContent: "Item is already in your favorites!",
-    };
-  }
+  switch (action.type) {
+    case "ITEM_ADDED":
+      const newFavs = [...state.favs, action.payload];
+      localStorage.setItem("favs", JSON.stringify(newFavs));
+      return {
+        ...state,
+        favs: newFavs,
+        isModalOpen: true,
+        modalContent: "Added to favorites!",
+      };
 
-  if (action.type === "CLOSE_MODAL") {
-    return {
-      ...state,
-      isModalOpen: false,
-    };
-  }
+    case "ITEM_DELETED": {
+      const filter = state.favs.filter((id) => id !== action.payload);
+      localStorage.setItem("favs", JSON.stringify(filter));
+      return {
+        ...state,
+        isModalOpen: true,
+        favs: filter,
+        modalContent: "Removed from favorites!",
+      };
+    }
 
-  throw new Error("No matching action type");
+    case "CLOSE_MODAL": {
+      return {
+        ...state,
+        isModalOpen: false,
+      };
+    }
+
+    default:
+      throw new Error("No matching action type");
+  }
 };

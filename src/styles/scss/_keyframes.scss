@@ -1,6 +1,7 @@
 @keyframes modal {
   to {
-    transform: translateY(0);
+    transform: translateX(0);
+    left: 0;
   }
 }
 

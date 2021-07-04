@@ -4,13 +4,9 @@ const Modal = ({ modalContent, closeModal }) => {
   useEffect(() => {
     setTimeout(() => {
       closeModal();
-    }, 500);
+    }, 750);
   }, [closeModal]);
-  return (
-    <div className="modal">
-      <p>{modalContent || ""}</p>
-    </div>
-  );
+  return <div className="modal">{modalContent || ""}</div>;
 };
 
 export default Modal;

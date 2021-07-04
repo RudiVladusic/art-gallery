@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import InitialDataContext from "../contexts/InitialDataContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
+import ArtCard from "./ArtCard";
 
 SwiperCore.use([Navigation]);
 
@@ -17,7 +17,6 @@ const GalleryContainer = () => {
         wrapperTag="ul"
         id="main"
         navigation
-        // pagination={{ clickable: true }}
         centeredSlides="true"
         grabCursor="true"
         breakpoints={{
@@ -41,43 +40,15 @@ const GalleryContainer = () => {
             slidesPerView: 4,
           },
         }}
-        // scrollbar={{ draggable: true }}
         onSlideChange={() => {
           console.log("slide change");
         }}
       >
         {initialData
           ? initialData.map((data) => {
-              const {
-                title,
-                objectDate,
-                objectID,
-                artistDisplayName,
-                primaryImageSmall,
-              } = data;
               return (
-                <SwiperSlide key={objectID} tag="li">
-                  <article className="gallery-main__article">
-                    <Link to={`/art/${objectID}`}>
-                      <header>
-                        <h2>{title}</h2>
-                      </header>
-                      <img src={`${primaryImageSmall}`} alt="" />
-                      <div className="artist-info">
-                        {artistDisplayName ? (
-                          <p>{artistDisplayName}</p>
-                        ) : (
-                          <p>Artist not listed</p>
-                        )}
-
-                        {objectDate ? (
-                          <p>Date: {objectDate}</p>
-                        ) : (
-                          <p>Date not listed</p>
-                        )}
-                      </div>
-                    </Link>
-                  </article>
+                <SwiperSlide key={data.objectID} tag="li">
+                  <ArtCard data={data} />
                 </SwiperSlide>
               );
             })
