@@ -8,6 +8,7 @@ export const getAllArt = async (query) => {
     const message = `Something went wrong, sorry ${call.status}`;
     throw new Error(message);
   }
+
   const ids = result.objectIDs
     .slice(0, 50)
     .map(

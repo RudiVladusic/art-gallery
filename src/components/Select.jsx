@@ -6,18 +6,25 @@ const Select = ({
   setIsLoading,
   setInitialData,
   getAllArt,
+  setIsError,
 }) => {
   return (
     <select
       name="department"
       id="department"
       onChange={(e) => {
+        console.log(e.target.value);
         getAllArt(e.target.value)
           .then(setIsLoading(true))
           .then((data) => {
             setInitialData(data);
             setIsLoading(false);
+
+            setIsError(false);
             localStorage.setItem("initialData", JSON.stringify(data));
+          })
+          .catch((error) => {
+            console.log(error);
           });
       }}
       defaultValue={selectValue}

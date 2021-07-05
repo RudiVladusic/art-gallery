@@ -20,24 +20,25 @@ const Main = () => {
     } else {
       setIsLoading(true);
       let query = "french";
-      getAllArt(query)
-        .then((data) => {
-          setInitialData(data);
-          setIsLoading(false);
-          localStorage.setItem("initialData", JSON.stringify(data));
-        })
-        .catch((error) => {
-          setIsError(true);
-          console.log(error);
-        });
+      getAllArt(query).then((data) => {
+        setInitialData(data);
+        setIsLoading(false);
+        localStorage.setItem("initialData", JSON.stringify(data));
+      });
     }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    console.log(searchTerm);
+    console.log(selectValue);
     getAllArt(searchTerm)
       .then((data) => {
+        console.log(data);
+        // const initialValues = localStorage.getItem("initialData");
+        // setInitialData(JSON.parse(initialValues));
+        setSelectValue("");
         setInitialData(data);
         setIsLoading(false);
         setIsError(false);
@@ -47,6 +48,10 @@ const Main = () => {
         setIsError(true);
         setIsLoading(false);
         console.log(error);
+        console.log(searchTerm);
+        console.log(selectValue);
+        setSearchTerm("");
+        setSelectValue("");
       });
   };
 
@@ -58,6 +63,7 @@ const Main = () => {
         setIsLoading={setIsLoading}
         getAllArt={getAllArt}
         setSelectValue={setSelectValue}
+        setIsError={setIsError}
       />
       <Form
         searchTerm={searchTerm}
