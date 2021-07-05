@@ -13,7 +13,6 @@ const Select = ({
       name="department"
       id="department"
       onChange={(e) => {
-        console.log(e.target.value);
         getAllArt(e.target.value)
           .then(setIsLoading(true))
           .then((data) => {

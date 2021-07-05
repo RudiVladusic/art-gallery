@@ -20,11 +20,16 @@ const Main = () => {
     } else {
       setIsLoading(true);
       let query = "french";
-      getAllArt(query).then((data) => {
-        setInitialData(data);
-        setIsLoading(false);
-        localStorage.setItem("initialData", JSON.stringify(data));
-      });
+      getAllArt(query)
+        .then((data) => {
+          setInitialData(data);
+          setIsLoading(false);
+          localStorage.setItem("initialData", JSON.stringify(data));
+        })
+        .catch((error) => {
+          setIsError(true);
+          console.log(error);
+        });
     }
   }, []);
 
@@ -35,10 +40,6 @@ const Main = () => {
     console.log(selectValue);
     getAllArt(searchTerm)
       .then((data) => {
-        console.log(data);
-        // const initialValues = localStorage.getItem("initialData");
-        // setInitialData(JSON.parse(initialValues));
-        setSelectValue("");
         setInitialData(data);
         setIsLoading(false);
         setIsError(false);
