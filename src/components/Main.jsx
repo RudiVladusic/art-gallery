@@ -36,8 +36,6 @@ const Main = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(searchTerm);
-    console.log(selectValue);
     getAllArt(searchTerm)
       .then((data) => {
         setInitialData(data);
@@ -49,10 +47,6 @@ const Main = () => {
         setIsError(true);
         setIsLoading(false);
         console.log(error);
-        console.log(searchTerm);
-        console.log(selectValue);
-        setSearchTerm("");
-        setSelectValue("");
       });
   };
 

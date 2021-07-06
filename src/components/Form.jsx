@@ -10,6 +10,7 @@ const Form = ({ handleSubmit, searchTerm, setSearchTerm }) => {
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
+        required
         value={searchTerm}
         placeholder="Search here..."
       />
