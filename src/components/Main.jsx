@@ -6,12 +6,15 @@ import Form from "./Form";
 import Error from "./presentational/Error";
 import Select from "./Select";
 import InitialDataContext from "../contexts/InitialDataContext";
+import { useHistory } from "react-router";
 const Main = () => {
   const [initialData, setInitialData] = useState(Array);
   const [isLoading, setIsLoading] = useState(Boolean);
   const [isError, setIsError] = useState(false);
   const [selectValue, setSelectValue] = useState(String);
   const [searchTerm, setSearchTerm] = useState(String);
+
+  let history = useHistory();
 
   useEffect(() => {
     const initialValues = localStorage.getItem("initialData");
@@ -35,6 +38,7 @@ const Main = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setIsLoading(true);
     getAllArt(searchTerm)
       .then((data) => {
@@ -42,6 +46,7 @@ const Main = () => {
         setIsLoading(false);
         setIsError(false);
         localStorage.setItem("initialData", JSON.stringify(data));
+        history.push("/");
       })
       .catch((error) => {
         setIsError(true);

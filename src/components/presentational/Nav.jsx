@@ -14,26 +14,15 @@ const Nav = () => {
 
   return (
     <nav>
-      <div className="nav-header-center">
-        <header>
-          <Link to="/">
-            <h2>Fine Art</h2>
-          </Link>
-        </header>
-      </div>
-      <div className="nav-desktop-links">
-        <Link to="/">Home</Link>
-        <Link to="/myfavorites">Favorites</Link>
-        <Link to="/about">About</Link>
-      </div>
-
-      <div
-        className={isBurgerOpen ? `burger open` : `burger`}
-        onClick={openMobileMenuHandler}
-      >
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
+      <div className="navbar-wrapper">
+        <div
+          className={isBurgerOpen ? `burger open` : `burger`}
+          onClick={openMobileMenuHandler}
+        >
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
       </div>
 
       <div className={isNavOpen ? `mobile-nav active` : `mobile-nav`}>
@@ -46,9 +35,9 @@ const Nav = () => {
         <Link onClick={openMobileMenuHandler} to="/about">
           About
         </Link>
-        <a href="https://github.com/RudiVladusic">
+        <Link to="https://github.com/RudiVladusic">
           <FontAwesomeIcon icon={faGithub} /> Rudi Vladušić
-        </a>
+        </Link>
       </div>
     </nav>
   );

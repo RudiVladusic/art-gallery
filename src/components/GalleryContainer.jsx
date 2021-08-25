@@ -12,39 +12,47 @@ const GalleryContainer = () => {
   return (
     <section className="gallery-main__container">
       <Swiper
-        spaceBetween={25}
+        spaceBetween={10}
         tag="section"
-        wrapperTag="ul"
+        wrapperTag="div"
         id="main"
         navigation
-        centeredSlides="true"
+        // centeredSlides="true"
         grabCursor="true"
         breakpoints={{
           0: {
             slidesPerView: 1,
           },
 
-          768: {
-            slidesPerView: 1,
-          },
-
-          820: {
+          500: {
             slidesPerView: 2,
           },
 
-          1000: {
+          768: {
+            slidesPerView: 2,
+          },
+
+          820: {
             slidesPerView: 3,
+          },
+
+          1000: {
+            slidesPerView: 4,
           },
 
           1200: {
             slidesPerView: 4,
+          },
+
+          1400: {
+            slidesPerView: 5,
           },
         }}
       >
         {initialData
           ? initialData.map((data) => {
               return (
-                <SwiperSlide key={data.objectID} tag="li">
+                <SwiperSlide key={data.objectID} tag="div">
                   <ArtCard data={data} />
                 </SwiperSlide>
               );
