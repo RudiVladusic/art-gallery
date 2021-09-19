@@ -1,24 +1,19 @@
 import { Link } from "react-router-dom";
 
 const ArtCard = ({ data }) => {
-  const { title, objectDate, artistDisplayName, primaryImageSmall, objectID } =
-    data;
+  const { title, objectDate, primaryImageSmall, objectID } = data;
   return (
     <article className="gallery-main__article">
-      <Link to={`/art/${objectID}`}>
-        <header>
-          <h2>{title.length > 40 ? `${title.slice(0, 40)}...` : title}</h2>
-        </header>
-        <img src={`${primaryImageSmall}`} alt="" />
-        <div className="artist-info">
-          {artistDisplayName ? (
-            <p>{artistDisplayName}</p>
-          ) : (
-            <p>Artist not listed</p>
-          )}
+      <header>
+        <h2>{title.length > 15 ? `${title.slice(0, 15)}...` : title}</h2>
+      </header>
+      <img src={`${primaryImageSmall}`} alt="" />
+      <div className="artist-info">
+        {objectDate ? <p>{objectDate}</p> : <p>Date not listed</p>}
+      </div>
 
-          {objectDate ? <p>Date: {objectDate}</p> : <p>Date not listed</p>}
-        </div>
+      <Link to={`/art/${objectID}`} className="rudi">
+        Details
       </Link>
     </article>
   );

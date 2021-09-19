@@ -1,0 +1,7 @@
+@mixin font-weight {
+  font-weight: 200;
+
+  @media (min-width: 100px) {
+    font-weight: 400;
+  }
+}

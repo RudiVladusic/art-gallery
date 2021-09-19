@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Della+Respira&family=Montserrat:ital,wght@0,200;0,400;1,200;1,400&display=swap");
 @-webkit-keyframes modal {
   to {
     -webkit-transform: translateX(0);
@@ -16,10 +16,12 @@
 
 @-webkit-keyframes loading-animation {
   0% {
-    -webkit-transform: rotateY(-40deg) rotateX(-20deg) rotate(-360deg);
-            transform: rotateY(-40deg) rotateX(-20deg) rotate(-360deg);
+    -webkit-transform: rotateY(-60deg) rotateX(60deg) rotate(-360deg);
+            transform: rotateY(-60deg) rotateX(60deg) rotate(-360deg);
+    opacity: 0.1;
   }
   100% {
+    opacity: 1;
     -webkit-transform: rotate(0);
             transform: rotate(0);
   }
@@ -27,10 +29,12 @@
 
 @keyframes loading-animation {
   0% {
-    -webkit-transform: rotateY(-40deg) rotateX(-20deg) rotate(-360deg);
-            transform: rotateY(-40deg) rotateX(-20deg) rotate(-360deg);
+    -webkit-transform: rotateY(-60deg) rotateX(60deg) rotate(-360deg);
+            transform: rotateY(-60deg) rotateX(60deg) rotate(-360deg);
+    opacity: 0.1;
   }
   100% {
+    opacity: 1;
     -webkit-transform: rotate(0);
             transform: rotate(0);
   }
@@ -115,13 +119,17 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   line-height: 1.6;
   scroll-behavior: smooth;
   background: #f0f5f9;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Montserrat", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  scrollbar-color: #010101 #f0f5f9;
+  scrollbar-width: thin;
 }
 
 img {
@@ -143,7 +151,6 @@ select {
 }
 
 form {
-  max-width: 25em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,9 +158,14 @@ form {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  max-width: 30em;
 }
 
 input {
+  width: 100%;
   border: none;
   background: transparent;
   outline: none;
@@ -183,7 +195,7 @@ nav {
   -webkit-box-shadow: 0 0.05em 0.5em #000;
           box-shadow: 0 0.05em 0.5em #000;
   z-index: 5;
-  height: 3em;
+  height: auto;
 }
 
 nav .navbar-wrapper {
@@ -192,15 +204,17 @@ nav .navbar-wrapper {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1em;
   place-items: center;
   height: 100%;
   width: 95vw;
   margin: 0 auto;
+  padding: 0.5em;
 }
 
 @media (max-width: 768px) {
@@ -208,6 +222,23 @@ nav .navbar-wrapper {
     position: fixed;
     top: 0;
   }
+}
+
+.desktop-nav {
+  display: none;
+  gap: 1em;
+}
+
+@media (min-width: 1200px) {
+  .desktop-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.desktop-nav a:hover {
+  text-decoration: underline;
 }
 
 .burger {
@@ -226,6 +257,12 @@ nav .navbar-wrapper {
           justify-content: space-evenly;
   gap: 0.25em;
   cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .burger {
+    display: none;
+  }
 }
 
 .burger .bar {
@@ -387,14 +424,14 @@ nav .navbar-wrapper {
 .loading {
   width: 13em;
   height: 13em;
-  margin: 0 auto;
-  border: 0.1em solid #010101;
+  margin: 1em auto;
+  border: 0.1em solid rgba(0, 0, 0, 0.15);
   border-radius: 50%;
-  border-bottom: 0.45em solid #010101;
+  border-bottom: 0.5em solid rgba(0, 0, 0, 0.15);
   -webkit-animation: loading-animation 5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
           animation: loading-animation 5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
-  -webkit-box-shadow: 0.1em 0.1em 0.75em #010101;
-          box-shadow: 0.1em 0.1em 0.75em #010101;
+  -webkit-box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.15);
+          box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.15);
   position: relative;
   background: url("../../images/world-38033_640.png") no-repeat center center/100% 100%;
 }
@@ -408,7 +445,6 @@ nav .navbar-wrapper {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2em;
   place-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -432,7 +468,7 @@ nav .navbar-wrapper {
   text-align: center;
   text-transform: uppercase;
   font-weight: 400;
-  font-family: "Marcellus", serif;
+  font-family: "Della Respira", serif;
   font-size: 1.25em;
 }
 
@@ -468,16 +504,14 @@ nav .navbar-wrapper {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-shadow: 0.105em 0.105em 0.5em #000;
-          box-shadow: 0.105em 0.105em 0.5em #000;
+  -webkit-box-shadow: 0em 0em 0.25em #010101, 0em 0em 0.25em #010101;
+          box-shadow: 0em 0em 0.25em #010101, 0em 0em 0.25em #010101;
   -webkit-animation: fade-in 0.5s ease-in-out;
           animation: fade-in 0.5s ease-in-out;
   overflow: hidden;
-  -webkit-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
+  padding: 0.5em;
   -webkit-transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
   transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
-  padding: 0.5em;
 }
 
 .swiper-container .gallery-main__article img {
@@ -485,60 +519,70 @@ nav .navbar-wrapper {
   margin: 0 auto;
   -o-object-fit: initial;
      object-fit: initial;
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
-.swiper-container .gallery-main__article:hover {
-  -webkit-transform: scale(1.025);
-          transform: scale(1.025);
+.swiper-container .gallery-main__article img:hover {
+  -webkit-transform: scale(2);
+          transform: scale(2);
+}
+
+.swiper-container .gallery-main__article header {
+  display: none;
 }
 
 .swiper-container .gallery-main__article header h2 {
-  font-family: "Marcellus", serif;
+  font-family: "Della Respira", serif;
   font-weight: 400;
   letter-spacing: 0.01em;
   font-size: clamp(1.25em, 2em, 2vw);
   text-align: center;
   padding: 0.25em;
-  color: #141414;
-}
-
-.swiper-container .gallery-main__article .artist-info {
-  padding: 0.25em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  color: #010101;
 }
 
 .swiper-container .gallery-main__article .artist-info :first-child {
-  text-align: right;
-  font-size: clamp(0.85em, 1em, 1.5vw);
-  font-style: italic;
-  font-family: "Marcellus", serif;
-  border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
-}
-
-.swiper-container .gallery-main__article .artist-info :last-child {
-  text-align: left;
-  font-size: 1.2em;
-  font-weight: 400;
-  font-size: clamp(0.85em, 1em, 1.5vw);
-}
-
-.swiper-container .gallery-main__article .artist-info p {
-  padding: 0.25em;
   text-align: center;
+  font-size: clamp(1em, 1.25em, 1.5vw);
+  font-style: italic;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+  font-weight: 200;
 }
 
 .gallery-main__container {
-  padding: 0.5em;
   min-height: calc(100vh - 10em);
+}
+
+.rudi {
+  outline: none;
+  background: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border: 0.2em solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, #010101, #83accd);
+  margin: 0.5em;
+  width: 100%;
+  place-self: center;
+  font-size: clamp(1.25em, 2em, 2vw);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: inherit;
+  -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  text-align: center;
+}
+
+.rudi:hover {
+  letter-spacing: 0;
+  border-image-source: #f0f5f9;
 }
 
 .my-favorites-main {
@@ -558,7 +602,7 @@ nav .navbar-wrapper {
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.01em;
-  font-family: "Marcellus", serif;
+  font-family: "Della Respira", serif;
 }
 
 .art-details-main {
@@ -590,6 +634,11 @@ nav .navbar-wrapper {
   margin: 0 auto;
   padding: 0.5em;
   overflow-x: hidden;
+}
+
+.art-details-main__article img {
+  -webkit-filter: drop-shadow(0 0 0.15em #010101);
+          filter: drop-shadow(0 0 0.15em #010101);
 }
 
 .art-details-main__article--title {
@@ -655,7 +704,7 @@ nav .navbar-wrapper {
   font-size: 1.25em;
   color: #141414;
   font-weight: 600;
-  font-family: "Marcellus", serif;
+  font-family: "Della Respira", serif;
 }
 
 .art-details-main__article-aside h4 {
@@ -698,7 +747,7 @@ nav .navbar-wrapper {
   font-size: 1.25em;
   color: #141414;
   font-weight: 600;
-  font-family: "Marcellus", serif;
+  font-family: "Della Respira", serif;
 }
 
 footer {

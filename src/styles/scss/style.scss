@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Della+Respira&family=Montserrat:ital,wght@0,200;0,400;1,200;1,400&display=swap");
 @import "keyframes";
 @import "variables";
 
@@ -6,13 +6,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   line-height: 1.6;
   scroll-behavior: smooth;
   background: $aliceblue;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Montserrat", sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  scrollbar-color: $black $aliceblue;
+  scrollbar-width: thin;
 }
 
 img {
@@ -33,12 +39,15 @@ select {
 }
 
 form {
-  max-width: 25em;
+  // max-width: 25em;
   display: flex;
   place-items: center;
   justify-content: space-between;
+  flex: 1;
+  max-width: 30em;
 }
 input {
+  width: 100%;
   border: none;
   background: transparent;
   outline: none;
@@ -62,21 +71,40 @@ nav {
   width: 100%;
   box-shadow: 0 0.05em 0.5em #000;
   z-index: 5;
-  height: 3em;
+  height: auto;
 
   .navbar-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 1em;
+    // justify-content: flex-end;
+
     place-items: center;
     height: 100%;
     width: 95vw;
     margin: 0 auto;
+    padding: 0.5em;
   }
 
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
+  }
+}
+
+.desktop-nav {
+  display: none;
+  gap: 1em;
+
+  @media (min-width: 1200px) {
+    display: flex;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -89,6 +117,10 @@ nav {
   justify-content: space-evenly;
   gap: 0.25em;
   cursor: pointer;
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
 
   .bar {
     width: 3em;
@@ -210,13 +242,13 @@ nav {
 .loading {
   width: 13em;
   height: 13em;
-  margin: 0 auto;
-  border: 0.1em solid $black;
+  margin: 1em auto;
+  border: 0.1em solid rgba(0, 0, 0, 0.15);
   border-radius: 50%;
-  border-bottom: 0.45em solid $black;
+  border-bottom: 0.5em solid rgba(0, 0, 0, 0.15);
   animation: loading-animation 5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
     infinite alternate;
-  box-shadow: 0.1em 0.1em 0.75em $black;
+  box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.15);
   position: relative;
   background: url("../../images/world-38033_640.png") no-repeat center
     center/100% 100%;
@@ -226,7 +258,7 @@ nav {
   padding: 5em 0.5em;
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  // gap: 2em;
   place-items: center;
   justify-content: center;
   width: 100%;
@@ -245,7 +277,7 @@ nav {
     text-align: center;
     text-transform: uppercase;
     font-weight: 400;
-    font-family: "Marcellus", serif;
+    font-family: "Della Respira", serif;
     font-size: $desktopFontSize;
   }
 
@@ -276,33 +308,37 @@ nav {
     gap: 0.5em;
     place-items: center;
     justify-content: space-between;
-    box-shadow: 0.105em 0.105em 0.5em #000;
+    box-shadow: 0em 0em 0.25em $black, 0em 0em 0.25em $black;
     // border: 0.5px solid red;
     animation: fade-in 0.5s ease-in-out;
     overflow: hidden;
-    transition: all 0.25s ease-in-out;
-    transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
     padding: 0.5em;
+    // transition: all 0.25s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
+    // padding: 0.5em;
 
     img {
       height: 20em;
       margin: 0 auto;
       object-fit: initial;
-    }
-
-    &:hover {
-      transform: scale(1.025);
+      // padding: 0.5em;
+      transition: transform 0.25s ease;
+      cursor: zoom-in;
+      &:hover {
+        transform: scale(2);
+      }
     }
 
     header {
+      display: none;
       h2 {
-        font-family: "Marcellus", serif;
+        font-family: "Della Respira", serif;
         font-weight: 400;
         letter-spacing: 0.01em;
         font-size: $desktopHeaderSizeQuery;
         text-align: center;
         padding: 0.25em;
-        color: #141414;
+        color: $black;
 
         // @media (max-width: 768px) {
         //   font-size: $mobileFontSize;
@@ -311,29 +347,14 @@ nav {
     }
 
     .artist-info {
-      padding: 0.25em;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
       :first-child {
-        text-align: right;
+        text-align: center;
+        // display: none;
         font-size: $defaultFontSizeQuery;
         font-style: italic;
-        font-family: "Marcellus", serif;
+        font-family: "Montserrat", sans-serif;
         border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
-      }
-
-      :last-child {
-        text-align: left;
-        font-size: 1.2em;
-        font-weight: 400;
-        font-size: $defaultFontSizeQuery;
-      }
-
-      p {
-        padding: 0.25em;
-        text-align: center;
+        font-weight: 200;
       }
     }
   }
@@ -342,8 +363,34 @@ nav {
 // swiper
 
 .gallery-main__container {
-  padding: 0.5em;
+  // padding: 0.5em;
   min-height: calc(100vh - 10em);
+}
+
+.rudi {
+  outline: none;
+  background: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border: 0.2em solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, $black, darken($aliceblue, 30%));
+  margin: 0.5em;
+  width: 100%;
+  place-self: center;
+  font-size: $desktopHeaderSizeQuery;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: inherit;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    letter-spacing: 0;
+    border-image-source: $aliceblue;
+    // padding: 0.25em 0.5em;
+  }
 }
 
 .my-favorites-main {
@@ -357,7 +404,7 @@ nav {
       text-transform: uppercase;
       text-align: center;
       letter-spacing: 0.01em;
-      font-family: "Marcellus", serif;
+      font-family: "Della Respira", serif;
     }
   }
 }
@@ -380,6 +427,9 @@ nav {
   margin: 0 auto;
   padding: 0.5em;
   overflow-x: hidden;
+  img {
+    filter: drop-shadow(0 0 0.15em $black);
+  }
 }
 
 .art-details-main__article--title {
@@ -432,7 +482,7 @@ nav {
     font-size: $desktopFontSize;
     color: #141414;
     font-weight: 600;
-    font-family: "Marcellus", serif;
+    font-family: "Della Respira", serif;
   }
 
   h4 {
@@ -472,7 +522,7 @@ nav {
       font-size: $desktopFontSize;
       color: #141414;
       font-weight: 600;
-      font-family: "Marcellus", serif;
+      font-family: "Della Respira", serif;
     }
   }
 }

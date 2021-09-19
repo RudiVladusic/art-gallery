@@ -7,9 +7,11 @@
 
 @keyframes loading-animation {
   0% {
-    transform: rotateY(-40deg) rotateX(-20deg) rotate(-360deg);
+    transform: rotateY(-60deg) rotateX(60deg) rotate(-360deg);
+    opacity: 0.1;
   }
   100% {
+    opacity: 1;
     transform: rotate(0);
   }
 }

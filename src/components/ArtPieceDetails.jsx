@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useHistory } from "react-router";
 import { useState, useEffect, useReducer } from "react";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as Checked } from "@fortawesome/free-regular-svg-icons";
@@ -27,6 +28,7 @@ const ArtPieceDetails = () => {
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
       );
       const result = await call.json();
+      console.log(result);
       if (!call.ok) {
         const message = `Something went wrong while fetching`;
         throw new Error(message);
@@ -66,6 +68,8 @@ const ArtPieceDetails = () => {
     dispatch({ type: "CLOSE_MODAL" });
   };
 
+  let history = useHistory();
+
   return (
     <main className="art-details-main">
       {artDetails.length > 0 ? (
@@ -80,13 +84,16 @@ const ArtPieceDetails = () => {
             department,
             medium,
             title,
-            accesionYear,
+            accessionYear,
             classification,
             country,
             tags,
             creditLine,
             objectID,
           } = data;
+          console.log(artDetails);
+          console.log(accessionYear);
+
           return (
             <article
               key={key(ArtPieceDetails)}
@@ -129,7 +136,7 @@ const ArtPieceDetails = () => {
                     <span>Culture:</span> {culture || "Not listed"}
                   </p>
                   <p>
-                    <span>Accesion Year:</span> {accesionYear || "Not listed"}
+                    <span>Accesion Year:</span> {accessionYear || "Not listed"}
                   </p>
                   <p>
                     <span>Country:</span> {country || "Not listed"}
@@ -156,6 +163,10 @@ const ArtPieceDetails = () => {
                     {tags &&
                       tags.map((hashtag, index) => (
                         <span
+                          onClick={(e) => {
+                            console.log(e.target.textContent.replace("#", ""));
+                            history.push("/");
+                          }}
                           className="hashtags"
                           key={index}
                         >{`#${hashtag.term}`}</span>

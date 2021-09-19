@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Nav = () => {
+
+import Form from "./Form";
+const Nav = ({ searchTerm, setSearchTerm, handleSubmit }) => {
   const [isNavOpen, setIsNavOpen] = useState(Boolean);
   const [isBurgerOpen, setIsBurgerOpen] = useState(Boolean);
 
@@ -15,6 +17,16 @@ const Nav = () => {
   return (
     <nav>
       <div className="navbar-wrapper">
+        <Form
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSubmit={handleSubmit}
+        />
+        <div className="desktop-nav">
+          <Link to="/">Home</Link>
+          <Link to="/myfavorites">My favorites</Link>
+          <Link to="/about">About</Link>
+        </div>
         <div
           className={isBurgerOpen ? `burger open` : `burger`}
           onClick={openMobileMenuHandler}
@@ -30,7 +42,7 @@ const Nav = () => {
           Home
         </Link>
         <Link onClick={openMobileMenuHandler} to="/myfavorites">
-          Favorites
+          My favorites
         </Link>
         <Link onClick={openMobileMenuHandler} to="/about">
           About
