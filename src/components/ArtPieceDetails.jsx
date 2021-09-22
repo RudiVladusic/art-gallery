@@ -1,6 +1,5 @@
-import { useParams } from "react-router";
-import { useHistory } from "react-router";
-import { useState, useEffect, useReducer } from "react";
+import { useParams, useHistory } from "react-router";
+import { useState, useEffect, useReducer, useContext } from "react";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as Checked } from "@fortawesome/free-regular-svg-icons";
 import Loading from "./presentational/Loading";
@@ -8,6 +7,7 @@ import key from "weak-key";
 import { artDetailReducer } from "../reducers/artDetailReducer";
 import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SelectContext from "../contexts/SelectContext";
 
 const defaultState = {
   isModalOpen: false,
@@ -20,7 +20,7 @@ const ArtPieceDetails = () => {
   const [artDetails, setArtDetails] = useState(Array);
   const [isBookmark, setIsBookmark] = useState(Boolean);
   const [state, dispatch] = useReducer(artDetailReducer, defaultState);
-
+  const { handleSubmit } = useContext(SelectContext);
   useEffect(() => {
     window.scrollTo(0, 0);
     const getArtDetails = async () => {
@@ -28,7 +28,7 @@ const ArtPieceDetails = () => {
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
       );
       const result = await call.json();
-      console.log(result);
+
       if (!call.ok) {
         const message = `Something went wrong while fetching`;
         throw new Error(message);
@@ -91,8 +91,6 @@ const ArtPieceDetails = () => {
             creditLine,
             objectID,
           } = data;
-          console.log(artDetails);
-          console.log(accessionYear);
 
           return (
             <article
@@ -164,12 +162,18 @@ const ArtPieceDetails = () => {
                       tags.map((hashtag, index) => (
                         <span
                           onClick={(e) => {
-                            console.log(e.target.textContent.replace("#", ""));
+                            handleSubmit(e);
                             history.push("/");
                           }}
                           className="hashtags"
                           key={index}
-                        >{`#${hashtag.term}`}</span>
+                        >
+                          <abbr
+                            title={`search for art with tag "${hashtag.term}"`}
+                          >
+                            {hashtag.term}
+                          </abbr>
+                        </span>
                       ))}
                   </p>
                 </div>

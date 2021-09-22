@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import Form from "./Form";
-const Nav = ({ searchTerm, setSearchTerm, handleSubmit }) => {
+import { useContext } from "react/cjs/react.development";
+import SelectContext from "../contexts/SelectContext";
+const Nav = () => {
+  const { searchTerm, setSearchTerm, handleSubmit } = useContext(SelectContext);
   const [isNavOpen, setIsNavOpen] = useState(Boolean);
   const [isBurgerOpen, setIsBurgerOpen] = useState(Boolean);
 

@@ -4,24 +4,30 @@ import { useEffect, useContext } from "react";
 import LoadingAndErrorContext from "../contexts/LoadingAndErrorContext";
 import InitialDataContext from "../contexts/InitialDataContext";
 import { getAllArt } from "../APIcalls/InitialDataCall";
+import Loading from "./presentational/Loading";
 const Main = () => {
-  const { setIsLoading, setIsError } = useContext(LoadingAndErrorContext);
-  const { setInitialData } = useContext(InitialDataContext);
+  const { setIsLoading, setIsError, isLoading } = useContext(
+    LoadingAndErrorContext
+  );
+  const { setInitialData, currentSearch, setCurrentSearch } =
+    useContext(InitialDataContext);
 
   useEffect(() => {
-    setIsLoading(true);
-    const initialValues = localStorage.getItem("initialData");
-    if (initialValues) {
-      setInitialData(JSON.parse(initialValues));
-      setIsLoading(false);
+    const userHasDataInLocalStorage = localStorage.getItem("initialData");
+    const initialSearch = localStorage.getItem("searchTerm");
+    if (userHasDataInLocalStorage) {
+      setInitialData(JSON.parse(userHasDataInLocalStorage));
+
+      setCurrentSearch(JSON.parse(initialSearch));
     } else {
       const query = "french";
+      setIsLoading(true);
       getAllArt(query)
         .then((data) => {
           setInitialData(data);
-          setIsLoading(false);
           localStorage.setItem("initialData", JSON.stringify(data));
-          console.log(data);
+          setCurrentSearch(`Currently displaying ${query} art`);
+          setIsLoading(false);
         })
         .catch((error) => {
           setIsError(true);
@@ -29,11 +35,17 @@ const Main = () => {
           console.log(error);
         });
     }
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
   return (
     <main className="gallery-main">
+      <h2 className="current-search">{currentSearch}</h2>
       <Select />
-      <GalleryContainer />
+      {isLoading ? <Loading /> : <GalleryContainer />}
     </main>
   );
 };

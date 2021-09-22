@@ -4,20 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Footer = () => {
   return (
     <footer>
-      <header>
-        <h2>
-          <a href="https://github.com/RudiVladusic">
-            <FontAwesomeIcon icon={faGithub} /> Rudi Vladušić
-          </a>
-        </h2>
-      </header>
+      <a href="https://github.com/RudiVladusic">
+        <FontAwesomeIcon icon={faGithub} />
+      </a>
+
       <div className="attribution">
-        <h4>
+        <p>
           All images and information is fetched with{" "}
           <a href="https://metmuseum.github.io/">
             Metropolian Museum of Art API
           </a>
-        </h4>
+        </p>
       </div>
     </footer>
   );

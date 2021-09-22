@@ -17,17 +17,30 @@ const App = () => {
   const [initialData, setInitialData] = useState(Array);
   const [isLoading, setIsLoading] = useState(Boolean);
   const [isError, setIsError] = useState(Boolean);
+  const [currentSearch, setCurrentSearch] = useState(String);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     setIsError(false);
+    if (e.target.tagName === "FORM") {
+      e.preventDefault();
+    }
+
     setIsLoading(true);
-    getAllArt(searchTerm)
+
+    const checkEventTarget =
+      e.target.tagName === "FORM"
+        ? searchTerm
+        : e.target.tagName === "SELECT"
+        ? e.target.value
+        : e.target.textContent;
+
+    getAllArt(checkEventTarget)
       .then((data) => {
-        setIsLoading(false);
         localStorage.setItem("initialData", JSON.stringify(data));
+        localStorage.setItem("searchTerm", JSON.stringify(checkEventTarget));
         setInitialData(data);
-        console.log(data);
+        setIsLoading(false);
+        setCurrentSearch(checkEventTarget);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -40,33 +53,40 @@ const App = () => {
     <Router>
       <Switch>
         <>
-          <Nav
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            handleSubmit={handleSubmit}
-          />
-          <LoadingAndErrorContext.Provider
-            value={{ isLoading, setIsLoading, isError, setIsError }}
+          <SelectContext.Provider
+            value={{
+              setInitialData,
+              searchTerm,
+              handleSubmit,
+              setSearchTerm,
+            }}
           >
-            <InitialDataContext.Provider
-              value={{ initialData, setInitialData }}
+            <Nav />
+            <LoadingAndErrorContext.Provider
+              value={{ isLoading, setIsLoading, isError, setIsError }}
             >
-              <SelectContext.Provider
-                value={{ setInitialData, searchTerm, getAllArt, setSearchTerm }}
+              <InitialDataContext.Provider
+                value={{
+                  initialData,
+                  setInitialData,
+                  currentSearch,
+                  setCurrentSearch,
+                }}
               >
                 <Route exact path="/">
                   <Main />
                 </Route>
-              </SelectContext.Provider>
-            </InitialDataContext.Provider>
+              </InitialDataContext.Provider>
 
-            <Route exact path="/art/:id">
-              <ArtPieceDetails />
-            </Route>
-            <Route exact path="/myfavorites">
-              <MyFavorites />
-            </Route>
-          </LoadingAndErrorContext.Provider>
+              <Route exact path="/art/:id">
+                <ArtPieceDetails />
+              </Route>
+
+              <Route exact path="/myfavorites">
+                <MyFavorites />
+              </Route>
+            </LoadingAndErrorContext.Provider>
+          </SelectContext.Provider>
           <Route exact path="/about">
             <About />
           </Route>

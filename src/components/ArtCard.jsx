@@ -9,7 +9,11 @@ const ArtCard = ({ data }) => {
       </header>
       <img src={`${primaryImageSmall}`} alt="" />
       <div className="artist-info">
-        {objectDate ? <p>{objectDate}</p> : <p>Date not listed</p>}
+        {objectDate.length > 20 ? (
+          <p>{objectDate.slice(0, 20)}...</p>
+        ) : (
+          <p>{objectDate || "Not listed"}</p>
+        )}
       </div>
 
       <Link to={`/art/${objectID}`} className="rudi">

@@ -17,7 +17,6 @@ const MyFavorites = () => {
 
     if (check !== null) {
       setIsLoading(true);
-      // setHasFavorites(true);
       const fetchUserFavs = async () => {
         const userFavorites = check.map(
           async (id) =>
@@ -39,6 +38,7 @@ const MyFavorites = () => {
     } else {
       setHasFavorites(false);
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
