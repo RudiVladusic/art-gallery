@@ -11,11 +11,12 @@ const MyFavorites = () => {
   SwiperCore.use([Navigation]);
   const { isLoading, setIsLoading } = useContext(LoadingAndErrorContext);
   const [toDisplay, setToDisplay] = useState(Array);
-  const [hasFavorites, setHasFavorites] = useState(true);
+  const [hasFavorites, setHasFavorites] = useState(false);
   const check = JSON.parse(localStorage.getItem("favs"));
   useEffect(() => {
     setIsLoading(true);
-    if (check !== null) {
+
+    if (check !== null && check.length > 0) {
       const fetchUserFavs = async () => {
         const userFavorites = check.map(
           async (id) =>
@@ -33,6 +34,7 @@ const MyFavorites = () => {
         .then((data) => {
           setToDisplay(data);
           setIsLoading(false);
+          setHasFavorites(true);
         })
         .catch((error) => console.log(error));
     } else {
@@ -47,6 +49,7 @@ const MyFavorites = () => {
       <header>
         <h2>My Favorites</h2>
       </header>
+      {console.log(hasFavorites)}
 
       {isLoading ? (
         <Loading />
