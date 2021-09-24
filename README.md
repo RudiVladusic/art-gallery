@@ -6,6 +6,10 @@ Through-the-history gallery of arts powered by [The Metropolitan Museum of Art C
 
 [React-MET-Art-Gallery](https://react-met-art-gallery.netlify.app/)
 
+## Desc
+
+Users can search by art department or through input to discover art from all over the world. Users can also save their favorite art pieces and bookmarks will be waiting for them on the next visit.
+
 ## Tech used
 
 HTML, CSS, ReactJS
@@ -17,4 +21,4 @@ React router, Font Awesome free SVG icons, React Swiper
 ## Todo
 
 - Add "related" component
-- Add pagination ?
+- Regular maintenance and updates

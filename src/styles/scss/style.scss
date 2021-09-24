@@ -32,19 +32,16 @@ img {
 select {
   padding: 0.5em;
   font-size: $defaultFontSizeQuery;
-  // background: darken(#f0f5f9, 5%);
   outline: none;
   border: none;
   color: $black;
   cursor: pointer;
-  // border-radius: 2em;
-  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.35);
+  box-shadow: 0.15em 0.25em 0.25em rgba(0, 0, 0, 0.25);
   font-family: inherit;
   @include font-weight();
 }
 
 form {
-  // max-width: 25em;
   display: flex;
   place-items: center;
   justify-content: space-between;
@@ -57,18 +54,12 @@ input {
   height: 100%;
   border: none;
   background: transparent;
-  // background: darken($white, 20%);
   outline: none;
   padding: 0.5em;
   font-size: $defaultFontSizeQuery;
-  // box-shadow: 0em 0.18em 0.12em -0.12em #000;
-  // transition: box-shadow 0.25s ease-in-out;
-  // &:focus {
-  //   box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
-  //     -0.12em -0.12em 0.18em -0.06em #000;
-  // }
 
   &:focus {
+    outline: 0.1em dotted $black;
     &::placeholder {
       opacity: 0;
     }
@@ -92,8 +83,6 @@ nav {
     flex-flow: row wrap;
     justify-content: space-between;
     gap: 1em;
-    // justify-content: flex-end;
-
     place-items: center;
     height: 100%;
     width: 95vw;
@@ -125,7 +114,6 @@ nav {
 .burger {
   display: flex;
   z-index: 9;
-  // padding: 0.5em;
   flex-direction: column;
   place-items: center;
   justify-content: space-evenly;
@@ -140,13 +128,8 @@ nav {
     width: 2.5em;
     height: 0.2em;
     background: $black;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   }
-
-  // :nth-child(2) {
-  //   width: 2.5em;
-  //   transform: translateX(0.5em);
-  // }
 
   @media (max-width: 768px) {
     display: flex;
@@ -169,7 +152,6 @@ nav {
 .mobile-nav {
   width: 100%;
   height: 100%;
-  // visibility: hidden;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
@@ -220,13 +202,14 @@ nav {
 
 .gallery-main {
   @media (max-width: 768px) {
-    padding: 5em 0em;
+    padding: 3.5em 0em;
+    gap: 1em;
   }
   display: flex;
   flex-direction: column;
   gap: 2em;
   place-items: center;
-  justify-content: start;
+  justify-content: center flex-start;
   width: 100%;
   min-height: calc(100vh - 5em);
 }
@@ -238,31 +221,39 @@ nav {
   place-items: start center;
   padding: 5em 0;
 
-  header {
-    text-align: center;
-    text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
-    font-size: $desktopHeaderSizeQuery;
-    width: min-content;
+  article {
+    display: grid;
+    place-items: center;
+    header {
+      width: min-content;
+      border-bottom: 0.1em solid rgba(225, 225, 225, 0.65);
+      h2 {
+        font-size: $desktopHeaderSizeQuery;
 
-    h3 {
-      border-bottom: 0.15em solid rgba(225, 225, 225, 0.65);
+        text-transform: uppercase;
+        font-family: "Roboto", sans-serif;
+      }
     }
-  }
 
-  p {
-    max-width: 60ch;
-    text-align: center;
-    padding: 0 0.5em;
-    @include font-weight();
-    font-size: $defaultFontSizeQuery;
+    p {
+      max-width: 60ch;
+      text-align: center;
+      padding: 0 0.5em;
+      @include font-weight();
+      font-size: $smallerHeaderSizeQuery;
+    }
   }
 }
 
 .current-search {
   text-align: center;
-  font-size: $defaultFontSizeQuery;
-  @media (min-width: 1200px) {
+  font-size: $smallerHeaderSizeQuery;
+  padding: 1em 0 0 0;
+  @include font-weight();
+  span {
+    border-bottom: 0.1em solid rgba(0, 0, 0, 0.25);
+  }
+  @media (min-width: 1000px) {
     padding: 2em 0 0 0;
   }
 }
@@ -277,120 +268,116 @@ nav {
 
   .swiper-slide {
     padding: 0.5em;
-    // overflow: hidden;
     width: 100%;
   }
 
-  .gallery-main__article {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    place-items: center;
-    justify-content: space-between;
-    box-shadow: 0.15em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-    // border: 0.5px solid red;
-    animation: fade-in 0.5s ease-in-out;
-    overflow: hidden;
-    padding: 0.5em;
-    // transition: all 0.25s ease-in-out;
-    transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
-    // padding: 0.5em;
-    position: relative;
-    // height: 30em;
-    img {
-      // position: absolute;
-      // inset: 0;
-      // width: 100%;
-      // height: 100%;
-      z-index: 1;
-      height: 20em;
-      margin: 0 auto;
-      object-fit: contain;
-      // padding: 0.5em;
-      transition: transform 0.25s ease;
-      // cursor: zoom-in;
-      // &:hover {
-      //   transform: scale(2);
-      // }
-    }
-
-    header {
-      display: none;
-      h2 {
-        font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        letter-spacing: 0.01em;
-        font-size: $desktopHeaderSizeQuery;
-        text-align: center;
-        padding: 0.25em;
-        color: $black;
-
-        // @media (max-width: 768px) {
-        //   font-size: $mobileFontSize;
-        // }
-      }
-    }
-
-    .artist-info {
-      :first-child {
-        text-align: center;
-        // display: none;
-        font-size: $defaultFontSizeQuery;
-        font-style: italic;
-        font-family: "Montserrat", sans-serif;
-        border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
-        @include font-weight();
-      }
-    }
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: $black !important;
+    transform: scale(1.3);
   }
 }
 
 // swiper
 
 .gallery-main__container {
-  // padding: 0.5em;
   min-height: calc(100vh - 10em);
 }
 
-.rudi {
+.gallery-main__article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  place-items: center;
+  justify-content: space-between;
+  box-shadow: 0.15em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+  animation: fade-in 0.5s ease-in-out;
+  overflow: hidden;
+  padding: 0.5em;
+  transition: all 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
+  position: relative;
+
+  img {
+    z-index: 1;
+    height: 20em;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  .artist-info {
+    :first-child {
+      text-align: center;
+
+      font-size: $defaultFontSizeQuery;
+      font-style: italic;
+      font-family: "Montserrat", sans-serif;
+      border-bottom: 0.01em solid rgba(0, 0, 0, 0.1);
+      @include font-weight();
+    }
+  }
+}
+
+.btn-default {
   outline: none;
   background: #fff;
   border: none;
   padding: 0.25em 0.5em;
-  border: 0.2em solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(90deg, $black, darken($white, 30%));
   margin: 0.5em;
-  // width: 100%;
   place-self: center;
   font-size: $defaultFontSizeQuery;
   text-transform: uppercase;
   letter-spacing: 0;
   font-family: inherit;
-  transition: letter-spacing 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: inherit;
   cursor: pointer;
   text-align: center;
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: $black;
+    transform: scale(0, 1);
+    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+    z-index: -1;
+  }
 
   &:hover {
-    letter-spacing: 0.1em;
+    color: $white !important;
+    &::before {
+      transform: scale(1, 1);
+    }
   }
 }
 
 .my-favorites-main {
   display: flex;
   flex-direction: column;
-  place-content: center start;
+  place-items: center;
+  gap: 2em;
   min-height: calc(100vh - 5em);
   @media (max-width: 768px) {
-    padding: 5em 0em;
+    padding: 3.5em 0em;
+    gap: 1em;
   }
   header {
-    padding: 2em 0 0 0;
+    place-self: center;
+    padding: 1em 0 0 0;
+
+    @media (max-width: 768px) {
+      padding: 1em 0 0 0;
+    }
     h2 {
-      text-transform: uppercase;
+      font-weight: 400;
       text-align: center;
       letter-spacing: 0.01em;
-      //font-family: 'Italiana', serif;
     }
   }
 }
@@ -410,11 +397,11 @@ nav {
 .art-details-main__article {
   display: flex;
   flex-flow: row wrap;
-  gap: 0.5em;
+  gap: 1em;
   place-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding: 0.5em;
+  padding: 1em;
   overflow-x: hidden;
   img {
     filter: drop-shadow(0 0 0.15em $black);
@@ -426,7 +413,6 @@ nav {
   position: relative;
   place-items: center;
   font-size: $desktopHeaderSizeQuery;
-  // line-height: 1;
 }
 
 .add-to-favorites {
@@ -466,7 +452,6 @@ nav {
   justify-content: space-between;
   place-self: flex-start;
   gap: 2em;
-  padding: 0.5em;
 
   h3 {
     font-size: $smallerHeaderSizeQuery;
@@ -507,6 +492,10 @@ nav {
     background: #303030;
     font-size: $defaultFontSizeQuery;
 
+    &:focus {
+      outline: 0.1em dotted $black;
+    }
+
     abbr {
       text-decoration: none;
       cursor: pointer;
@@ -524,7 +513,6 @@ nav {
 }
 
 footer {
-  // display: none;
   background: $black;
   min-height: 10em;
   padding: 1em;
@@ -556,4 +544,8 @@ footer {
   border: none;
   font-size: inherit;
   cursor: pointer;
+
+  &:focus {
+    outline: 0.1em dotted $black;
+  }
 }

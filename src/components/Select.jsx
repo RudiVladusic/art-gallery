@@ -37,6 +37,9 @@ const Select = () => {
       }}
       value={selectValue}
     >
+      <option value={selectValue} disabled>
+        Select department here...
+      </option>
       {departments.map((data) => {
         const { displayName, departmentId } = data;
 

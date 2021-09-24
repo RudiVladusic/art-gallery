@@ -25,9 +25,15 @@ const Nav = () => {
           handleSubmit={handleSubmit}
         />
         <div className="desktop-nav">
-          <Link to="/">Home</Link>
-          <Link to="/myfavorites">My favorites</Link>
-          <Link to="/about">About</Link>
+          <Link tabIndex="0" to="/">
+            Home
+          </Link>
+          <Link tabIndex="0" to="/myfavorites">
+            My favorites
+          </Link>
+          <Link tabIndex="0" to="/about">
+            About
+          </Link>
         </div>
         <div
           className={isBurgerOpen ? `burger open` : `burger`}

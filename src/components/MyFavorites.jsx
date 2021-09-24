@@ -12,11 +12,10 @@ const MyFavorites = () => {
   const { isLoading, setIsLoading } = useContext(LoadingAndErrorContext);
   const [toDisplay, setToDisplay] = useState(Array);
   const [hasFavorites, setHasFavorites] = useState(true);
+  const check = JSON.parse(localStorage.getItem("favs"));
   useEffect(() => {
-    const check = JSON.parse(localStorage.getItem("favs"));
-
+    setIsLoading(true);
     if (check !== null) {
-      setIsLoading(true);
       const fetchUserFavs = async () => {
         const userFavorites = check.map(
           async (id) =>
@@ -29,6 +28,7 @@ const MyFavorites = () => {
 
         return Promise.all(userFavorites);
       };
+
       fetchUserFavs()
         .then((data) => {
           setToDisplay(data);
@@ -51,24 +51,31 @@ const MyFavorites = () => {
         <Loading />
       ) : hasFavorites ? (
         <Swiper
-          spaceBetween={25}
+          spaceBetween={10}
           tag="section"
           wrapperTag="div"
           id="main"
           navigation
-          centeredSlides="true"
+          // pagination
+          // centeredSlides="true"
           grabCursor="true"
+          lazy="true"
+          preloadImages="false"
           breakpoints={{
             0: {
               slidesPerView: 1,
             },
 
+            500: {
+              slidesPerView: 2,
+            },
+
             768: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
 
             820: {
-              slidesPerView: 2,
+              slidesPerView: 3,
             },
 
             1000: {
@@ -77,6 +84,10 @@ const MyFavorites = () => {
 
             1200: {
               slidesPerView: 4,
+            },
+
+            1400: {
+              slidesPerView: 5,
             },
           }}
         >

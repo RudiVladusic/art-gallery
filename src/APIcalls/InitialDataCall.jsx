@@ -4,6 +4,7 @@ export const getAllArt = async (query) => {
     { method: "GET" }
   );
   const result = await call.json();
+
   if (!call.ok) {
     const message = `Something went wrong, sorry ${call.status}`;
     throw new Error(message);

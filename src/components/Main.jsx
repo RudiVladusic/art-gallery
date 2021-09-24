@@ -11,22 +11,33 @@ const Main = () => {
   );
   const { setInitialData, currentSearch, setCurrentSearch } =
     useContext(InitialDataContext);
-
+  const userHasDataInLocalStorage = localStorage.getItem("initialData");
+  const initialSearch = localStorage.getItem("searchTerm");
+  const randomSearchTermsForFirstVisit = [
+    "American Decorative Arts",
+    "Egyptian Art",
+    "European Paintings",
+    "Greek and Roman Art",
+    "Medieval Art",
+    "Photographs",
+    "Modern Art",
+  ];
   useEffect(() => {
-    const userHasDataInLocalStorage = localStorage.getItem("initialData");
-    const initialSearch = localStorage.getItem("searchTerm");
     if (userHasDataInLocalStorage) {
       setInitialData(JSON.parse(userHasDataInLocalStorage));
-
       setCurrentSearch(JSON.parse(initialSearch));
     } else {
-      const query = "french";
+      const query =
+        randomSearchTermsForFirstVisit[
+          Math.floor(Math.random() * randomSearchTermsForFirstVisit.length)
+        ];
       setIsLoading(true);
       getAllArt(query)
         .then((data) => {
           setInitialData(data);
           localStorage.setItem("initialData", JSON.stringify(data));
-          setCurrentSearch(`Currently displaying ${query} art`);
+          localStorage.setItem("searchTerm", JSON.stringify(query));
+          setCurrentSearch(query);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -43,8 +54,11 @@ const Main = () => {
   }, []);
   return (
     <main className="gallery-main">
-      <h2 className="current-search">{currentSearch}</h2>
+      <h2 className="current-search">
+        Currently displaying: <span>{currentSearch}</span>
+      </h2>
       <Select />
+
       {isLoading ? <Loading /> : <GalleryContainer />}
     </main>
   );

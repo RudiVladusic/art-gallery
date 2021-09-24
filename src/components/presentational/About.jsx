@@ -5,11 +5,11 @@ const About = () => {
     <main className="about-main">
       <article>
         <header>
-          <h3>About</h3>
+          <h2>About</h2>
         </header>
         <p>This is a project created with ReactJS.</p>
         <p>
-          Explore and bookmark your favorite art pieces, i hope you will enjoy
+          Explore and bookmark your favorite art pieces, I hope you will enjoy
           the view!
         </p>
       </article>

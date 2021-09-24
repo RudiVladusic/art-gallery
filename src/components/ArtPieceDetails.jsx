@@ -21,6 +21,8 @@ const ArtPieceDetails = () => {
   const [isBookmark, setIsBookmark] = useState(Boolean);
   const [state, dispatch] = useReducer(artDetailReducer, defaultState);
   const { handleSubmit } = useContext(SelectContext);
+  const itemInStorage = JSON.parse(localStorage.getItem("favs"));
+  let history = useHistory();
   useEffect(() => {
     window.scrollTo(0, 0);
     const getArtDetails = async () => {
@@ -39,7 +41,6 @@ const ArtPieceDetails = () => {
   }, [id]);
   // eslint-disable-next-line
   useEffect(() => {
-    const itemInStorage = JSON.parse(localStorage.getItem("favs"));
     if (itemInStorage) {
       defaultState.favs = itemInStorage;
     }
@@ -67,8 +68,6 @@ const ArtPieceDetails = () => {
   const closeModal = () => {
     dispatch({ type: "CLOSE_MODAL" });
   };
-
-  let history = useHistory();
 
   return (
     <main className="art-details-main">
@@ -161,6 +160,7 @@ const ArtPieceDetails = () => {
                     {tags &&
                       tags.map((hashtag, index) => (
                         <span
+                          tabIndex="0"
                           onClick={(e) => {
                             handleSubmit(e);
                             history.push("/");
