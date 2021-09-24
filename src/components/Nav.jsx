@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Form from "./Form";
-import { useContext } from "react/cjs/react.development";
 import SelectContext from "../contexts/SelectContext";
 const Nav = () => {
   const { searchTerm, setSearchTerm, handleSubmit } = useContext(SelectContext);

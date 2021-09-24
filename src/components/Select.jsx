@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useContext, useState, useEffect } from "react";
 import SelectContext from "../contexts/SelectContext";
 
 const Select = () => {
