@@ -37,6 +37,7 @@ const MyFavorites = () => {
         .catch((error) => console.log(error));
     } else {
       setHasFavorites(false);
+      setIsLoading(false);
     }
     // eslint-disable-next-line
   }, []);
@@ -56,8 +57,6 @@ const MyFavorites = () => {
           wrapperTag="div"
           id="main"
           navigation
-          // pagination
-          // centeredSlides="true"
           grabCursor="true"
           lazy="true"
           preloadImages="false"
