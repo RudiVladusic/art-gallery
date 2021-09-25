@@ -49,7 +49,6 @@ const MyFavorites = () => {
       <header>
         <h2>My Favorites</h2>
       </header>
-      {console.log(hasFavorites)}
 
       {isLoading ? (
         <Loading />
